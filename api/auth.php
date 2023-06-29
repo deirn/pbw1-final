@@ -11,7 +11,7 @@ if ($user_cookie_base64 == null) {
     header("Location: /auth");
 } else {
     $user_cookie = json_decode(base64_decode($user_cookie_base64), true);
-    $user = User::get_user($user_cookie['username']);
+    $user = User::get($user_cookie['username']);
 
     if ($user != null && $user->password == $user_cookie['password']) {
         $_SESSION['username'] = $user->username;

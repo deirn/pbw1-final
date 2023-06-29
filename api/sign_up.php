@@ -25,17 +25,17 @@ if ($display_name == "") {
         "error_field" => "password",
         "error_msg" => "Missing"
     ]);
-} elseif (!preg_match("/^[a-z0-9_]/", $username)) {
+} elseif (!User::is_valid_username_characters($username)) {
     echo json_encode([
         "error_field" => "username",
         "error_msg" => "Can only contains a-z 0-9 and _"
     ]);
-} elseif (strlen($username) < 5 || strlen($username) > 15) {
+} elseif (!User::is_valid_username_length($username)) {
     echo json_encode([
         "error_field" => "username",
         "error_msg" => "Must be 5-15 characters long"
     ]);
-} elseif (User::get_user($username) != null) {
+} elseif (User::get($username) != null) {
     echo json_encode([
         "error_field" => "username",
         "error_msg" => "Already Used!"
@@ -51,6 +51,6 @@ if ($display_name == "") {
         "error_msg" => "Doesn't Match!"
     ]);
 } else {
-    User::create_new_user($username, $password, $display_name);
+    User::create($username, $password, $display_name);
     echo json_encode([]);
 }
