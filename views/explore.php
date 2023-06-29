@@ -1,12 +1,11 @@
 <?php
-$page_title = "Home";
+$page_title = "Explore";
 ?>
 
 <!doctype html>
 <html lang="en">
 
 <head><?php require __DIR__ . '/../component/header.php' ?>
-  <title>Home</title>
   <style>
     <?php require __DIR__ . '/../component/navbar.css' ?>
   </style>
