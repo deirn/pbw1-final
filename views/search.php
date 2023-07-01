@@ -5,27 +5,22 @@ $page_title = "Search";
 <!doctype html>
 <html lang="en">
 
-<head><?php require __DIR__ . '/../component/header.php' ?>
-  <title>Search</title>
-  <style>
-    <?php require __DIR__ . '/../component/navbar.css' ?>
-  </style>
+<head>
+    <?php PhpComponents::header(); ?>
+    <?php CssComponents::navbar(); ?>
 </head>
 
 <body>
 
 <div class="container d-flex">
-    <?php require __DIR__ . '/../component/navbar.php' ?>
+    <?php PhpComponents::navbar(); ?>
 
   <div class="flex-grow-1 p-3 border-end">
   </div>
 </div>
 
-<?php require __DIR__ . '/../component/footer.php' ?>
-
-<script>
-    <?php require __DIR__ . '/../component/navbar.js' ?>
-</script>
+<?php PhpComponents::footer(); ?>
+<?php JsComponents::tooltip(); ?>
 
 </body>
 </html>

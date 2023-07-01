@@ -1,0 +1,10 @@
+body {
+    background-color: var(--bs-light);
+    overflow-y: scroll;
+}
+
+@media (min-width: 992px) {
+    .c-container {
+        max-width: 960px;
+    }
+}

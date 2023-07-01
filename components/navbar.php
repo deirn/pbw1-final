@@ -9,11 +9,11 @@ function active_class(string $title): string
 
 ?>
 
-<div class="c-nav sticky-top d-flex flex-column border-end py-3 pe-3">
-  <ul class="nav nav-flush flex-column gap-2 flex-grow-1">
+<div class="c-nav sticky-top d-flex flex-column border-end p-3">
+  <ul class="nav nav-flush flex-column gap-3 flex-grow-1">
     <li class="nav-item">
       <a href="/home" class="c-nav-icon nav-link active">
-        <i class="active fa-align-center fa-solid fa-bug fa-spin-pulse"></i>
+        <i class="active fa-solid fa-fw fa-bug fa-spin-pulse"></i>
       </a>
     </li>
 
@@ -22,7 +22,7 @@ function active_class(string $title): string
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="right" data-bs-title="Home">
-        <i class="fa-solid fa-home"></i>
+        <i class="fa-solid fa-fw fa-home"></i>
       </a>
     </li>
 
@@ -31,7 +31,7 @@ function active_class(string $title): string
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="right" data-bs-title="Explore">
-        <i class="fa-solid fa-compass"></i>
+        <i class="fa-solid fa-fw fa-compass"></i>
       </a>
     </li>
 
@@ -40,27 +40,27 @@ function active_class(string $title): string
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="right" data-bs-title="Search">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-fw fa-magnifying-glass"></i>
       </a>
     </li>
 
     <li class="nav-item">
-      <a href="/search" class="c-nav-icon c-nav-primary nav-link text-primary"
+      <a href="?new" class="c-nav-icon c-nav-primary nav-link text-primary"
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="right" data-bs-title="New Status">
-        <i class="fa-solid fa-pen-to-square"></i>
+        <i class="fa-solid fa-fw fa-pen-to-square"></i>
       </a>
     </li>
-  </ul>
 
-  <ul class="nav nav-flush flex-column gap-2">
+    <li class="nav-item flex-grow-1"></li>
+
     <li class="nav-item">
-      <a href="/profile" class="c-nav-icon nav-link"
+      <a href="/profile/<?= $_SESSION['username'] ?>" class="c-nav-icon nav-link"
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="right" data-bs-title="Profile">
-        <i class="fa-solid fa-user"></i>
+        <i class="fa-solid fa-fw fa-user"></i>
       </a>
     </li>
 
@@ -69,7 +69,7 @@ function active_class(string $title): string
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="right" data-bs-title="Logout">
-        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <i class="fa-solid fa-fw fa-arrow-right-from-bracket"></i>
       </a>
     </li>
   </ul>

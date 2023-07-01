@@ -19,9 +19,4 @@ global $page_title;
 
 <title><?= "{$page_title} | {$_ENV['SITE_TITLE']}" ?></title>
 
-<style>
-  body {
-      background-color: var(--bs-light);
-      overflow-y: scroll;
-  }
-</style>
+<?php CssComponents::root(); ?>

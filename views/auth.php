@@ -1,5 +1,4 @@
 <?php
-
 $new = isset($_GET['new']);
 session_destroy();
 
@@ -7,13 +6,14 @@ unset($_COOKIE['login']);
 setcookie('login', '', time() - 3600, '/');
 
 $page_title = $new ? 'Sign Up' : 'Login';
-
 ?>
 
 <!doctype html>
 <html lang="en">
 
-<head><?php require __DIR__ . '/../component/header.php' ?>
+<head>
+    <?php PhpComponents::header(); ?>
+
   <style>
       .c-auth {
           width: 25em;
@@ -68,7 +68,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
 
 </div>
 
-<?php require __DIR__ . '/../component/footer.php' ?>
+<?php PhpComponents::footer(); ?>
 
 <?php if ($new) { ?>
   <script>
