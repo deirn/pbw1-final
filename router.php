@@ -30,8 +30,15 @@ if ($request == '/auth') {
             require __DIR__ . '/views/search.php';
             break;
 
+        // /profile/[username]
         case 1 == preg_match("/^\/profile\/([a-z0-9_]{5,15})$/", $request, $slug_matches):
             require __DIR__ . '/views/profile.php';
+            break;
+
+        // /profile/[username]/following
+        // /profile/[username]/followers
+        case 1 == preg_match("/^\/profile\/([a-z0-9_]{5,15})\/(following|followers)$/", $request, $slug_matches):
+            require __DIR__ . '/views/connection.php';
             break;
 
         default:

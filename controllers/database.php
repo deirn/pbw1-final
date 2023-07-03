@@ -134,6 +134,9 @@ class Connection
     public string $follower_username;
     public string $following_username;
 
+    private ?User $_follower = null;
+    private ?User $_following = null;
+
     public static function get(string $follower_username, string $following_username): ?Connection
     {
         // language=mariadb
@@ -238,5 +241,23 @@ class Connection
         $query = "delete from connection where connection_id=?";
         $statement = DB::prepare_statement($query, "s", $this->connection_id);
         $statement->execute();
+    }
+
+    public function resolve_follower(): User
+    {
+        if ($this->_follower == null) {
+            $this->_follower = User::get($this->follower_username);
+        }
+
+        return $this->_follower;
+    }
+
+    public function resolve_following(): User
+    {
+        if ($this->_following == null) {
+            $this->_following = User::get($this->following_username);
+        }
+
+        return $this->_following;
     }
 }

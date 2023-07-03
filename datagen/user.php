@@ -1,4 +1,6 @@
-<?php
+<?php /** @noinspection PhpUnreachableStatementInspection */
+
+die('Already generated');
 
 require_once __DIR__ . '/../index.php';
 require_once __DIR__ . '/../controllers/database.php';
@@ -7,7 +9,7 @@ use Faker\Factory;
 use Controllers\Database\User;
 
 $faker = Factory::create();
-$output_file = fopen(__DIR__ . '/output/user.php', 'w') or die("Unable to open file");
+$output_file = fopen(__DIR__ . '/output/user.php', 'w') or die('Unable to open file');
 
 // language=php
 $header = <<<EOL

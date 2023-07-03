@@ -24,18 +24,9 @@ $page_title = "{$user->display_name} (@{$user->username})";
 <head>
     <?php PhpComponents::header(); ?>
     <?php CssComponents::navbar(); ?>
+    <?php CssComponents::profile_header(); ?>
 
   <style>
-      .c-back-button {
-          line-height: 1.25em;
-          padding: 0.25em;
-          border-radius: 50%;
-      }
-
-      .c-back-button:hover {
-          background-color: var(--bs-gray-200);
-      }
-
       .c-banner-picture {
           background-color: var(--bs-gray-400);
           height: 13rem;
@@ -62,7 +53,7 @@ $page_title = "{$user->display_name} (@{$user->username})";
       }
 
       .c-buttons > button {
-          width: 6.5em;
+          min-width: 6.5em;
       }
 
       #unfollow-button > span:before {
@@ -87,10 +78,8 @@ $page_title = "{$user->display_name} (@{$user->username})";
     <?php PhpComponents::navbar(); ?>
 
   <div class="flex-grow-1 border-end">
-    <div class="px-3 py-2 d-flex gap-3 border-bottom sticky-top bg-light">
-      <button class="c-back-button btn my-auto" onclick="history.back()"><i class="fa-solid fa-fw fa-arrow-left"></i>
-      </button>
-      <div class="fs-5"><?= $user->display_name ?></div>
+    <div class="sticky-top bg-light">
+        <?php PhpComponents::profile_header($user); ?>
     </div>
 
     <div class="border-bottom pb-3">
