@@ -30,6 +30,10 @@ if ($request == '/auth') {
             require __DIR__ . '/views/search.php';
             break;
 
+        case '/settings/profile':
+            require __DIR__ . '/views/profile_settings.php';
+            break;
+
         // /profile/[username]
         case 1 == preg_match("/^\/profile\/([a-z0-9_]{5,15})$/", $request, $slug_matches):
             require __DIR__ . '/views/profile.php';

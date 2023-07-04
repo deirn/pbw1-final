@@ -94,14 +94,13 @@ $page_title = $is_following_tab
         foreach ($connections as $connection) {
             $connection_user = $is_following_tab ? $connection->resolve_following() : $connection->resolve_follower();
             $followed_by_client = Connection::get($client_username, $connection_user->username) != null;
-            $following_client = Connection::get($connection_user->username, $client_username) != null;
             ?>
 
           <li class="c-user nav-item d-flex px-3 py-2 gap-3"
               data-followed="<?= $followed_by_client ? 'true' : 'false' ?>"
               data-username="<?= $connection_user->username ?>">
 
-            <div class="c-avatar"></div>
+            <div class="c-avatar flex-shrink-0 mb-auto"></div>
 
             <div class="d-flex flex-column flex-grow-1">
               <div class="d-flex">
@@ -110,12 +109,9 @@ $page_title = $is_following_tab
                      class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
                       <?= $connection_user->display_name ?>
                   </a>
-                  <div>
-                    <span class="font-monospace text-body-secondary">@<?= $connection_user->username ?></span>
-                      <?php if ($following_client) { ?>
-                          <span class="badge text-secondary bg-secondary-subtle">Follows you</span>
-                      <?php } ?>
-                  </div>
+
+                    <?php PhpComponents::profile_username($connection_user) ?>
+
                 </div>
 
                 <div class="c-profile-buttons my-auto">
@@ -125,6 +121,7 @@ $page_title = $is_following_tab
                   <button class="c-profile-button c-follow btn btn-dark fw-bold">Follow</button>
                 </div>
               </div>
+              <div><?= $connection_user->bio ?? '' ?></div>
             </div>
 
           </li>

@@ -2,7 +2,6 @@
 
 namespace Controllers\Database;
 
-use Iterator;
 use mysqli;
 use mysqli_stmt;
 
@@ -59,6 +58,7 @@ class User
     public string $password;
     public string $display_name;
     public ?string $avatar;
+    public ?string $bio;
 
     public static function get(string $username): ?User
     {
@@ -75,12 +75,12 @@ class User
         return null;
     }
 
-    public static function create(string $username, string $password, string $display_name): ?User
+    public static function create(string $username, string $password, string $display_name, ?string $bio = null): ?User
     {
         // language=mariadb
-        $query = "insert into user(username, password, display_name) values (?, ?, ?)";
+        $query = "insert into user(username, password, display_name, bio) values (?, ?, ?, ?)";
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $statement = DB::prepare_statement($query, "sss", $username, $hashed_password, $display_name);
+        $statement = DB::prepare_statement($query, "ssss", $username, $hashed_password, $display_name, $bio);
 
         if ($statement->execute()) {
             $user = new User();
@@ -88,10 +88,19 @@ class User
             $user->password = $password;
             $user->display_name = $display_name;
             $user->avatar = null;
+            $user->bio = $bio;
             return $user;
         }
 
         return null;
+    }
+
+    public static function edit(string $username, string $display_name, ?string $bio): bool
+    {
+        // language=mariadb
+        $query = "update user set display_name=?, bio=? where username=?";
+        $statement = DB::prepare_statement($query, "sss", $display_name, $bio, $username);
+        return $statement->execute();
     }
 
     public static function is_valid_username_characters(string $username): bool
@@ -130,9 +139,9 @@ class Status
 
 class Connection
 {
-    public int $connection_id;
-    public string $follower_username;
-    public string $following_username;
+    public readonly int $connection_id;
+    public readonly string $follower_username;
+    public readonly string $following_username;
 
     private ?User $_follower = null;
     private ?User $_following = null;
@@ -175,7 +184,7 @@ class Connection
     public static function get_followers(string $username): iterable
     {
         // language=mariadb
-        $query = "select * from connection where following_username=?";
+        $query = "select * from connection where following_username=? order by connection_id desc";
         $statement = DB::prepare_statement($query, "s", $username);
         $statement->execute();
         $result = $statement->get_result();

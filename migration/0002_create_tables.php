@@ -58,14 +58,18 @@ alter table status
 
 create or replace table user
 (
-    username     varchar(15) not null,
-    password     varchar(64) not null,
-    display_name varchar(30) not null,
-    avatar       varchar(64) null
+    user_id      int auto_increment
+        primary key,
+    username     varchar(15)  not null,
+    password     varchar(64)  not null,
+    display_name varchar(30)  not null,
+    avatar       varchar(64)  null,
+    bio          varchar(160) null
 );
 
 alter table user
-    add primary key (username);
+    add constraint username
+        unique (username);
 
 alter table connection
     add constraint connection_ibfk_1
@@ -79,7 +83,7 @@ alter table connection
 
 alter table status
     add constraint status_ibfk_2
-        foreign key (username) references user (username)
+        foreign key (username) references user (username);
 EOL;
 
 DB::connection()->multi_query($query);

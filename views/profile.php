@@ -89,7 +89,9 @@ $page_title = "{$user->display_name} (@{$user->username})";
         <div class="c-avatar"></div>
         <div class="c-buttons pt-3 pe-3">
             <?php if ($user_is_client) { ?>
-              <button class="btn btn-light border border-dark-subtle fw-bold">Edit Profile</button>
+              <a href="/settings/profile" class="btn btn-light border border-dark-subtle fw-bold">
+                Edit Profile
+              </a>
             <?php } else { ?>
               <button class="btn btn-light border border-dark-subtle fw-bold" id="unfollow-button">
                 <span></span>
@@ -102,8 +104,14 @@ $page_title = "{$user->display_name} (@{$user->username})";
       <div class="px-3 d-flex flex-column gap-2">
         <div>
           <div class="fw-bold fs-5"><?= $user->display_name ?></div>
-          <div class="font-monospace">@<?= $user->username ?></div>
+
+            <?php PhpComponents::profile_username($user) ?>
+
         </div>
+
+          <?php if ($user->bio != null) { ?>
+            <div><?= $user->bio ?></div>
+          <?php } ?>
 
         <div class="d-flex gap-3">
           <a href="/profile/<?= $user->username ?>/following"

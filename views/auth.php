@@ -23,7 +23,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
           width: 100%;
       }
 
-      .c-label > .error-text {
+      .c-label > .c-hint {
           float: right;
       }
   </style>
@@ -73,23 +73,22 @@ $page_title = $new ? 'Sign Up' : 'Login';
 <?php if ($new) { ?>
   <script>
       $("#sign-up").click(function () {
-          const display_name = $("#display_name");
+          const displayName = $("#display_name");
           const username = $("#username");
           const password = $("#password");
-          const repeat_password = $("#repeat_password");
+          const repeatPassword = $("#repeat_password");
 
           $.post("/api/sign_up.php", {
               username: username.val(),
               password: password.val(),
-              repeat_password: repeat_password.val(),
-              display_name: display_name.val()
+              repeat_password: repeatPassword.val(),
+              display_name: displayName.val()
           }, function (json) {
               const data = JSON.parse(json);
 
               if (data["error_field"] !== undefined) {
                   $(`#${data["error_field"]}`).addClass("border-danger");
-                  $(`.error-text.${data["error_field"]}`).html(`${data["error_msg"]}`);
-                  console.log(data);
+                  $(`.c-hint.${data["error_field"]}`).html(`${data["error_msg"]}`);
               } else {
                   window.top.location = "/auth";
               }
@@ -110,8 +109,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
 
               if (data["error_field"] !== undefined) {
                   $(`#${data["error_field"]}`).addClass("border-danger");
-                  $(`.error-text.${data["error_field"]}`).html(`${data["error_msg"]}`);
-                  console.log(data);
+                  $(`.c-hint.${data["error_field"]}`).html(`${data["error_msg"]}`);
               } else {
                   window.top.location = "/";
               }
@@ -122,7 +120,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
 
 <script>
     $(".input").on("input", function () {
-        $(this).siblings().children(".error-text").html("");
+        $(this).siblings().children(".c-hint").html("");
         $(this).removeClass("border-danger");
     });
 </script>
