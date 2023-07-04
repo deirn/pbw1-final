@@ -12,7 +12,7 @@ $page_title = "Home";
 
 <body>
 
-<div class="container d-flex">
+<div class="c-container container d-flex">
     <?php PhpComponents::navbar(); ?>
 
   <div class="flex-grow-1 p-3 border-end">

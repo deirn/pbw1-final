@@ -34,11 +34,11 @@ create or replace table status
 (
     status_id        int auto_increment
         primary key,
-    username         varchar(15) not null,
-    parent_status_id int         null,
-    status_content   tinytext    not null,
-    created_at       datetime    not null,
-    updated_at       datetime    null
+    username         varchar(15)  not null,
+    parent_status_id int          null,
+    status_content   varchar(280) not null,
+    created_at       datetime     not null,
+    updated_at       datetime     null
 );
 
 alter table attachment
@@ -83,7 +83,8 @@ alter table connection
 
 alter table status
     add constraint status_ibfk_2
-        foreign key (username) references user (username);
+        foreign key (username) references user (username)
+            on update cascade on delete cascade;
 EOL;
 
 DB::connection()->multi_query($query);

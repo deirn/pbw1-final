@@ -120,6 +120,8 @@ class Status
     public string $username;
     public ?int $parent_status_id;
     public string $status_content;
+    public string $created_at;
+    public ?string $updated_at;
 
     public static function get_status(int $status_id): ?Status
     {
@@ -131,6 +133,25 @@ class Status
 
         if ($result->num_rows > 0) {
             return $result->fetch_object(Status::class);
+        }
+
+        return null;
+    }
+
+    public static function create_ancestor(string $username, string $status_content, string $created_at): ?Status
+    {
+        // language=mariadb
+        $query = "insert into status(username, status_content, created_at) values (?, ?, ?)";
+        $statement = DB::prepare_statement($query, "sss", $username, $status_content, $created_at);
+
+        if ($statement->execute()) {
+            $status = new Status();
+            $status->status_id = $statement->insert_id;
+            $status->parent_status_id = null;
+            $status->status_content = $status_content;
+            $status->created_at = $created_at;
+            $status->updated_at = null;
+            return $status;
         }
 
         return null;
