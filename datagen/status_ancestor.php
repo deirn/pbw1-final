@@ -36,7 +36,7 @@ foreach (GeneratedUsers::$output as $index => $user) {
     echo "{$username}: {$total_status}" . PHP_EOL;
 
     for ($i = 0; $i < $total_status; $i++) {
-        $status_content = addslashes($faker->realText(280));
+        $status_content = $faker->text(280);
         $created_at = $faker->dateTimeBetween('-2 month')->format('Y-m-d H:i:s');
 
         // language=php

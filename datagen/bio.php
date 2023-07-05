@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpUnreachableStatementInspection */
 
-//die('Already generated');
+die('Already generated');
 
 require_once __DIR__ . '/../index.php';
 require_once __DIR__ . '/output/user.php';
@@ -32,7 +32,7 @@ fwrite($output_file, $header);
 
 foreach (GeneratedUsers::$output as $index => $user) {
     $username = $user['username'];
-    $bio = addslashes($faker->realText(160));
+    $bio = $faker->text(160);
 
     // language=php
     $entry = <<<EOL
