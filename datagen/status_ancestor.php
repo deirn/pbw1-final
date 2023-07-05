@@ -32,7 +32,7 @@ fwrite($output_file, $header);
 
 foreach (GeneratedUsers::$output as $index => $user) {
     $username = $user['username'];
-    $total_status = rand(10, 25);
+    $total_status = rand(5, 10);
     echo "{$username}: {$total_status}" . PHP_EOL;
 
     for ($i = 0; $i < $total_status; $i++) {
