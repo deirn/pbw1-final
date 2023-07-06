@@ -1,9 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../datagen/output/engagement.php';
-
-use Controllers\Database\Engagement;
-use Datagen\Output\GeneratedEngagements;
+use Database\Controllers\Engagement;
+use Database\Datagen\Output\GeneratedEngagements;
 
 $total = 0;
 

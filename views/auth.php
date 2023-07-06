@@ -1,4 +1,6 @@
 <?php
+global $page_title;
+
 $new = isset($_GET['new']);
 session_destroy();
 
@@ -23,7 +25,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
           width: 100%;
       }
 
-      .c-label > .c-hint {
+      .c-label > .c-error-text {
           float: right;
       }
   </style>
@@ -37,29 +39,29 @@ $page_title = $new ? 'Sign Up' : 'Login';
 
     <?php if ($new) { ?>
       <div class="mb-3 text-start">
-        <label class="c-label" for="display_name">Name <span class="text-danger error-text display_name"></span></label>
+        <label class="c-label" for="display_name">Name <span class="text-danger c-error-text display_name"></span></label>
         <input type="text" class="form-control input" id="display_name" placeholder="Name">
       </div>
     <?php } ?>
 
   <div class="mb-3 text-start">
-    <label class="c-label" for="username">Username <span class="text-danger error-text username"></span></label>
+    <label class="c-label" for="username">Username <span class="text-danger c-error-text username"></span></label>
     <input type="text" class="form-control input" id="username" placeholder="Username">
   </div>
   <div class="mb-3 text-start">
-    <label class="c-label" for="password">Password <span class="text-danger error-text password"></span></label>
+    <label class="c-label" for="password">Password <span class="text-danger c-error-text password"></span></label>
     <input type="password" class="form-control input" id="password" placeholder="Password">
   </div>
 
     <?php if ($new) { ?>
       <div class="mb-3 text-start">
         <label class="c-label" for="repeat_password">Repeat Password <span
-            class="text-danger error-text repeat_password"></span></label>
+            class="text-danger c-error-text repeat_password"></span></label>
         <input type="password" class="form-control input" id="repeat_password" placeholder="Password">
       </div>
       <button class="btn btn-primary mb-3" id="sign-up">Sign Up</button>
       <br/>
-      Have an account? <a href="auth">Login.</a>
+      Have an account? <a href="/auth">Login.</a>
     <?php } else { ?>
       <button class="btn btn-primary mb-3" id="login">Login</button>
       <br/>
@@ -78,7 +80,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
           const password = $("#password");
           const repeatPassword = $("#repeat_password");
 
-          $.post("/api/sign_up.php", {
+          $.post("/api/sign_up", {
               username: username.val(),
               password: password.val(),
               repeat_password: repeatPassword.val(),
@@ -101,7 +103,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
           const username = $("#username");
           const password = $("#password");
 
-          $.post("/api/login.php", {
+          $.post("/api/login", {
               username: username.val(),
               password: password.val(),
           }, function (json) {

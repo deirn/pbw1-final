@@ -1,9 +1,10 @@
 <?php
 
-use Controllers\Database\Connection;
-use Controllers\Database\User;
+use Database\Controllers\Connection;
+use Database\Controllers\User;
 
 global $slug_matches;
+global $page_title;
 
 $client_username = $_SESSION['username'];
 $slug_username = $slug_matches[1];
@@ -142,7 +143,7 @@ $page_title = "{$user->display_name} (@{$user->username})";
     const viewedUsername = "<?= $user->username ?>";
 
     function fetchStatus(idAfter) {
-        $.get("/api/get_profile_status.php", {
+        $.get("/api/get_profile_status", {
             username: viewedUsername,
             id_before: idAfter
         }, statusHandler);
@@ -171,7 +172,7 @@ $page_title = "{$user->display_name} (@{$user->username})";
 
       function clickButton(type) {
           return function () {
-              $.post("/api/follow.php", {
+              $.post("/api/follow", {
                   type,
                   follower: clientUsername,
                   following: viewedUsername

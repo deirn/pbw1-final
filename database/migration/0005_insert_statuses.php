@@ -1,9 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../datagen/output/status_ancestor.php';
-
-use Controllers\Database\Status;
-use Datagen\Output\GeneratedStatusAncestors;
+use Database\Controllers\Status;
+use Database\Datagen\Output\GeneratedStatusAncestors;
 
 $ancestors = GeneratedStatusAncestors::$output;
 

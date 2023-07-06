@@ -1,4 +1,6 @@
 <?php
+global $page_title;
+
 $client_username = $_SESSION['username'];
 
 $page_title = "Home";
@@ -32,7 +34,7 @@ $page_title = "Home";
     const clientUsername = "<?= $client_username ?>";
 
     function fetchStatus(idAfter) {
-        $.get("/api/get_home_status.php", {
+        $.get("/api/get_home_status", {
             username: clientUsername,
             id_before: idAfter
         }, statusHandler);

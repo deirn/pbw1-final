@@ -1,9 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../index.php';
-
-use Controllers\Database\Engagement;
-use Controllers\Database\Status;
+use Database\Controllers\Engagement;
+use Database\Controllers\Status;
 
 $username = $_GET['username'];
 $id_before = $_GET['id_before'];

@@ -1,6 +1,6 @@
 <?php
 
-use Controllers\Database\DB;
+use Database\Controllers\DB;
 
 // language=MariaDB
 $query = <<<EOL

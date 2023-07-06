@@ -1,3 +1,1 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*)$ router.php
+Deny from all

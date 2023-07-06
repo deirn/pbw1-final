@@ -1,6 +1,8 @@
 <?php
 
-use Controllers\Database\User;
+use Database\Controllers\User;
+
+global $page_title;
 
 $client_username = $_SESSION['username'];
 $user = User::get($client_username);
@@ -65,7 +67,7 @@ $page_title = "Profile Settings";
     });
 
     saveButton.click(function () {
-        $.post("/api/edit_profile.php", {
+        $.post("/api/edit_profile", {
             username: clientUsername,
             display_name: displayName.val(),
             bio: bio.val().trim()

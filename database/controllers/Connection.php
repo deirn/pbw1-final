@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers\Database;
+namespace Database\Controllers;
 
 class Connection
 {

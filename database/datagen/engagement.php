@@ -1,21 +1,19 @@
 <?php /** @noinspection PhpUnreachableStatementInspection */
 
-//die('Already generated');
+die('Already generated');
 
-require_once __DIR__ . '/../index.php';
-require_once __DIR__ . '/output/user.php';
-require_once __DIR__ . '/output/status_ancestor.php';
+require_once __DIR__ . '/../../index.php';
 
-use Datagen\Output\GeneratedStatusAncestors;
-use Datagen\Output\GeneratedUsers;
+use Database\Datagen\Output\GeneratedStatusAncestors;
+use Database\Datagen\Output\GeneratedUsers;
 
-$output_file = fopen(__DIR__ . '/output/engagement.php', 'w') or die('Unable to open file');
+$output_file = fopen(__DIR__ . '/output/GeneratedEngagements.php', 'w') or die('Unable to open file');
 
 // language=php
 $header = <<<EOL
 <?php
 
-namespace Datagen\\Output;
+namespace Database\\Datagen\\Output;
 
 class GeneratedEngagements {
     public static array \$output = [

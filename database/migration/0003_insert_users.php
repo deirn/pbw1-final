@@ -1,11 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../datagen/output/bio.php';
-require_once __DIR__ . '/../datagen/output/user.php';
-
-use Controllers\Database\User;
-use Datagen\Output\GeneratedBios;
-use Datagen\Output\GeneratedUsers;
+use Database\Controllers\User;
+use Database\Datagen\Output\GeneratedBios;
+use Database\Datagen\Output\GeneratedUsers;
 
 $total = 0;
 

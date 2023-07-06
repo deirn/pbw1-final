@@ -1,6 +1,6 @@
 <?php
 
-namespace Datagen\Output;
+namespace Database\Datagen\Output;
 
 class GeneratedUsers {
     public static array $output = [

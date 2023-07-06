@@ -1,8 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../index.php';
-
-use Controllers\Database\User;
+use Database\Controllers\User;
 
 $user_cookie_base64 = $_COOKIE['login'] ?? null;
 

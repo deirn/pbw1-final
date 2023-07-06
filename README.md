@@ -1,12 +1,17 @@
-## Running
+## Running Locally using XAMPP in Windows
 
-1. Add virtual host, you can use different directory and/or domain
+1. Install [XAMPP](https://www.apachefriends.org/) and [Composer](https://getcomposer.org/).
+2. Add virtual host, you can use different directory and/or domain,
+   just make sure to set the document root to the `public` folder.
+
+   In the example, the repo is located in `C:\xampp\htdocs\final`
+   and the domain is `final_0013.test`.
    ```apacheconf
-   # httpd-vhosts.conf
+   # C:\xampp\apache\conf\extra\httpd-vhosts.conf
    <VirtualHost final_0013.test>
-   DocumentRoot "C:/xampp/htdocs/final"
+   DocumentRoot "C:/xampp/htdocs/final/public"
    ServerName final_0013.test
-       <Directory "C:/xampp/htdocs/final">
+       <Directory "C:/xampp/htdocs/final/public">
            Options FollowSymLinks
            AllowOverride All
    
@@ -16,17 +21,17 @@
    </VirtualHost>
    ```
    ```
-   # hosts file
+   # C:\Windows\System32\drivers\etc\hosts
    127.0.0.1       final_0013.test
    ```
-2. Make sure the database service is running
-3. Copy `.env_example` to `.env` and populate it
-4. Install Dependencies and migrate database
+3. Start Apache and MySQL module on XAMPP control panel.
+4. Copy `.env_example` to `.env` and modify if needed.
+5. Install Dependencies and migrate database.
    ```
    composer install
-   php migration/0000_all.php
+   php database/migration/0000_all.php
    ```
-5. Go to `final_0013.test`
+6. Go to `final_0013.test`.
 
 ## Libraries
 

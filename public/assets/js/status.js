@@ -1,7 +1,7 @@
 let earliestStatusId = 0;
 
 function likeButtonClick(statusId) {
-    $.post("/api/like.php", {
+    $.post("/api/like", {
         status_id: statusId
     }, function (json) {
         const data = JSON.parse(json);

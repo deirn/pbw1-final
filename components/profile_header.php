@@ -1,7 +1,7 @@
 <?php
 global $component_args;
 
-use Controllers\Database\User;
+use Database\Controllers\User;
 
 $arg_user = get_typed_arg(0, User::class);
 ?>

@@ -1,8 +1,8 @@
 <?php
 global $component_args;
 
-use Controllers\Database\Connection;
-use Controllers\Database\User;
+use Database\Controllers\Connection;
+use Database\Controllers\User;
 
 $client_username = $_SESSION['username'];
 $arg_user = get_typed_arg(0, User::class);

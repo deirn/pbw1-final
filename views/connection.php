@@ -1,9 +1,10 @@
 <?php
 
-use Controllers\Database\Connection;
-use Controllers\Database\User;
+use Database\Controllers\Connection;
+use Database\Controllers\User;
 
 global $slug_matches;
+global $page_title;
 
 $client_username = $_SESSION['username'];
 $slug_username = $slug_matches[1];
@@ -159,7 +160,7 @@ $page_title = $is_following_tab
             return function (e) {
                 e.stopPropagation();
 
-                $.post("/api/follow.php", {
+                $.post("/api/follow", {
                     type,
                     follower: clientUsername,
                     following: username

@@ -1,9 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../datagen/output/connection.php';
-
-use Controllers\Database\Connection;
-use Datagen\Output\GeneratedConnections;
+use Database\Controllers\Connection;
+use Database\Datagen\Output\GeneratedConnections;
 
 $total = 0;
 

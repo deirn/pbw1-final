@@ -1,8 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../index.php';
-
-use Controllers\Database\Connection;
+use Database\Controllers\Connection;
 
 $type = $_POST['type'];
 $follower = $_POST['follower'];

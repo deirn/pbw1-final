@@ -6,7 +6,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Controllers\\Database\\": "controllers/database"
+            "Database\\Controllers\\": "database/controllers",
+            "Database\\Datagen\\Output\\": "database/datagen/output"
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use Controllers\Database\User;
+use Database\Controllers\User;
 
 $component_args = [];
 

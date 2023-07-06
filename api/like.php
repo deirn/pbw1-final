@@ -1,8 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../index.php';
-
-use Controllers\Database\Engagement;
+use Database\Controllers\Engagement;
 
 $username = $_SESSION['username'];
 $status_id = $_POST['status_id'];

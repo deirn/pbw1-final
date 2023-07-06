@@ -2,19 +2,19 @@
 
 die('Already generated');
 
-require_once __DIR__ . '/../index.php';
+require_once __DIR__ . '/../../index.php';
 
-use Controllers\Database\User;
+use Database\Controllers\User;
 use Faker\Factory;
 
 $faker = Factory::create();
-$output_file = fopen(__DIR__ . '/output/user.php', 'w') or die('Unable to open file');
+$output_file = fopen(__DIR__ . '/output/GeneratedUsers.php', 'w') or die('Unable to open file');
 
 // language=php
 $header = <<<EOL
 <?php
 
-namespace Datagen\\Output;
+namespace Database\\Datagen\\Output;
 
 class GeneratedUsers {
     public static array \$output = [

@@ -1,8 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../index.php';
-
-use Controllers\Database\User;
+use Database\Controllers\User;
 
 $username = $_POST['username'];
 $password = $_POST['password'];
