@@ -1,7 +1,6 @@
 <?php
 
 require_once __DIR__ . '/../index.php';
-require_once __DIR__ . '/../controllers/database.php';
 
 use Controllers\Database\Connection;
 

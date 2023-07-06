@@ -3,10 +3,9 @@
 die('Already generated');
 
 require_once __DIR__ . '/../index.php';
-require_once __DIR__ . '/../controllers/database.php';
 
-use Faker\Factory;
 use Controllers\Database\User;
+use Faker\Factory;
 
 $faker = Factory::create();
 $output_file = fopen(__DIR__ . '/output/user.php', 'w') or die('Unable to open file');

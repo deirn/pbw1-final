@@ -7,7 +7,7 @@
     padding: 0.5em;
     width: 2em;
     height: 2em;
-    color: var(--bs-gray-500);
+    color: var(--bs-secondary);
     font-size: 1.5em;
     display: flex;
     justify-content: center;
@@ -15,11 +15,11 @@
 }
 
 .c-nav-icon.active, .c-nav-icon:hover, .c-nav-icon:focus {
-    color: var(--bs-gray-900);
+    color: var(--bs-dark);
 }
 
 .c-nav-icon:hover {
-    background-color: var(--bs-gray-200);
+    background-color: var(--bs-secondary-bg-subtle);
 }
 
 .c-nav-primary.active, .c-nav-primary:hover, .c-nav-primary:focus {

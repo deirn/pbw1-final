@@ -1,0 +1,38 @@
+.c-status:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.01);
+}
+
+.c-status-avatar {
+    width: 3rem;
+    height: 3rem;
+    background-color: tomato;
+    border-radius: 50%;
+}
+
+.c-status-buttons > div {
+    width: 5em;
+}
+
+.c-status-buttons .c-like, .c-status-buttons .c-comment {
+    text-align: left;
+    line-height: 1.25em;
+    padding: 0.25em;
+    border-radius: 3em;
+}
+
+.c-status-buttons .c-like {
+    color: var(--bs-danger) !important;
+}
+
+.c-status-buttons .c-like:hover {
+    background-color: var(--bs-danger-bg-subtle);
+}
+
+.c-status-buttons .c-comment {
+    color: var(--bs-secondary) !important;
+}
+
+.c-status-buttons .c-comment:hover {
+    background-color: var(--bs-secondary-bg-subtle);
+}

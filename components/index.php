@@ -37,6 +37,7 @@ class PhpComponents
  * @method static navbar
  * @method static root
  * @method static profile_header
+ * @method static status
  */
 class CssComponents
 {
@@ -49,6 +50,7 @@ class CssComponents
 }
 
 /**
+ * @method static status
  * @method static tooltip
  */
 class JsComponents

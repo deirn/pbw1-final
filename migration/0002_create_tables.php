@@ -24,11 +24,21 @@ create or replace table connection
     following_username varchar(15) not null
 );
 
-create or replace index follower_username
-    on connection (follower_username);
+alter table connection
+    add constraint connection_username
+        unique (follower_username, following_username);
 
-create or replace index following_username
-    on connection (following_username);
+create or replace table engagement
+(
+    engagement_id int auto_increment
+        primary key,
+    username      varchar(15) not null,
+    status_id     int         not null
+);
+
+alter table engagement
+    add constraint username_status_id
+        unique (username, status_id);
 
 create or replace table status
 (
@@ -43,6 +53,10 @@ create or replace table status
 
 alter table attachment
     add constraint attachment_ibfk_1
+        foreign key (status_id) references status (status_id);
+
+alter table engagement
+    add constraint engagement_ibfk_2
         foreign key (status_id) references status (status_id);
 
 create or replace index parent_status_id
@@ -79,6 +93,11 @@ alter table connection
 alter table connection
     add constraint connection_ibfk_2
         foreign key (following_username) references user (username)
+            on update cascade on delete cascade;
+
+alter table engagement
+    add constraint engagement_ibfk_1
+        foreign key (username) references user (username)
             on update cascade on delete cascade;
 
 alter table status

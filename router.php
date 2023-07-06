@@ -2,7 +2,6 @@
 
 require_once __DIR__ . '/index.php';
 require_once __DIR__ . '/components/index.php';
-require_once __DIR__ . '/controllers/database.php';
 
 $request = rtrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 

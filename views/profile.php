@@ -25,6 +25,7 @@ $page_title = "{$user->display_name} (@{$user->username})";
     <?php PhpComponents::header(); ?>
     <?php CssComponents::navbar(); ?>
     <?php CssComponents::profile_header(); ?>
+    <?php CssComponents::status(); ?>
 
   <style>
       .c-banner-picture {
@@ -126,15 +127,38 @@ $page_title = "{$user->display_name} (@{$user->username})";
       </div>
     </div>
 
+    <div class="d-flex flex-column" id="status-container">
+
+    </div>
+
   </div>
 </div>
 
 <?php PhpComponents::footer(); ?>
 <?php JsComponents::tooltip(); ?>
+<?php JsComponents::status(); ?>
+
+<script>
+    const viewedUsername = "<?= $user->username ?>";
+
+    function fetchStatus(idAfter) {
+        $.get("/api/get_profile_status.php", {
+            username: viewedUsername,
+            id_before: idAfter
+        }, statusHandler);
+    }
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+            fetchStatus(earliestStatusId);
+        }
+    });
+
+    fetchStatus(0);
+</script>
 
 <?php if (!$user_is_client) { ?>
   <script>
-      const viewedUsername = "<?= $user->username ?>";
       const clientUsername = "<?= $client_username ?>";
 
       let followed = <?= $user_is_followed ? 'true' : 'false' ?>;
