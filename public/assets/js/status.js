@@ -33,16 +33,21 @@ function formatStatusDate(date) {
     return `${date.getHours()}:${date.getMinutes()} - ${monthName[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
-function createStatusDiv({username, status_id, status_content, created_at, display_name, like_count, liked_by_client}) {
+function createStatusDiv({status_id, username, status_content, created_at, display_name, like_count, child_count, liked_by_client}) {
     const heartStyle = liked_by_client ? "fa-solid" : "fa-regular";
     const date = parseMysqlDateTime(created_at);
     const dateString = formatStatusDate(date);
 
     // language=html
     return `
-      <div class="c-status p-3 d-flex gap-3 border-bottom" id="status-${status_id}">
-        <div class="c-status-avatar flex-shrink-0 mb-auto"></div>
-        <div class="d-flex flex-column gap-2 flex-grow-1">
+      <div class="c-status px-3 d-flex gap-3 border-bottom" id="status-${status_id}">
+        <div class="d-flex flex-column flex-shrink-0">
+          <div class="c-thread-line c-hidden" id="thread-line-before"></div>
+          <div class="c-status-avatar"></div>
+          <div class="c-thread-line c-hidden flex-grow-1" id="thread-line-after"></div>
+        </div>
+        
+        <div class="d-flex py-3 flex-column gap-2 flex-grow-1">
           <div>
             <div class="d-flex gap-2">
               <a href="/profile/${username}"
@@ -58,7 +63,7 @@ function createStatusDiv({username, status_id, status_content, created_at, displ
           </div>
           <div class="c-status-buttons d-flex gap-3">
             <div>
-              <button class="c-comment btn"><i class="fa-regular fa-fw fa-comment"></i></button>
+              <button class="c-comment btn"><i class="fa-regular fa-fw fa-comment"></i> ${child_count}</button>
             </div>
             <div>
               <button class="c-like btn">

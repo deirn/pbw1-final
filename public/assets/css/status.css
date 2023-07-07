@@ -36,3 +36,14 @@
 .c-status-buttons .c-comment:hover {
     background-color: var(--bs-secondary-bg-subtle);
 }
+
+.c-status .c-thread-line {
+    margin: 0 auto;
+    min-height: 1em;
+    width: 2px;
+    background-color: var(--bs-border-color);
+}
+
+.c-status .c-thread-line.c-hidden {
+    width: 0;
+}

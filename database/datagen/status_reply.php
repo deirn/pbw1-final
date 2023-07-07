@@ -35,7 +35,7 @@ $parent_status_id = 0;
 foreach (GeneratedStatusAncestors::$output as $ancestor) {
     $parent_status_id++;
     $total_reply = rand(1, 5);
-    $ancestor_time = DateTimeImmutable::createFromFormat(DB::DATE_FORMAT, $ancestor['created_at']);
+    $ancestor_time = DB::parse_date_time_string($ancestor['created_at']);
 
     for ($i = 0; $i < $total_reply; $i++) {
         $user_index = rand(0, count(GeneratedUsers::$output) - 1);

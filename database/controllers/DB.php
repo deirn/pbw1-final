@@ -3,6 +3,7 @@
 namespace Database\Controllers;
 
 use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use mysqli;
 use mysqli_stmt;
@@ -58,5 +59,10 @@ class DB
     public static function create_date_time_string(DateTimeInterface $date_time = new DateTime()): string
     {
         return $date_time->format(self::DATE_FORMAT);
+    }
+
+    public static function parse_date_time_string(string $date_time_string): DateTimeImmutable
+    {
+        return DateTimeImmutable::createFromFormat(self::DATE_FORMAT, $date_time_string);
     }
 }

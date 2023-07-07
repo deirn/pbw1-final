@@ -17,16 +17,23 @@ class Status
     // table: engagement
     public ?int $like_count;
 
+    public ?int $child_count;
+
     public static function get(int $status_id): ?Status
     {
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
-                         count(engagement.status_id) as like_count
+                         count(engagement.status_id) as like_count,
+                         count(distinct child_status.status_id) as child_count
                   from status
                        join user on user.username=status.username
-                       left join engagement on status.status_id=engagement.status_id
-                  where status.status_id=?";
+                       left join engagement 
+                            on status.status_id=engagement.status_id
+                       left join status child_status 
+                            on child_status.parent_status_id=status.status_id
+                  where status.status_id=?
+                  group by status.status_id";
 
         $statement = DB::prepare_statement($query, "i", $status_id);
         $statement->execute();
@@ -54,6 +61,7 @@ class Status
             $status->created_at = $created_at;
             $status->updated_at = null;
             $status->like_count = 0;
+            $status->child_count = 0;
             return $status;
         }
 
@@ -75,6 +83,7 @@ class Status
             $status->created_at = $created_at;
             $status->updated_at = null;
             $status->like_count = 0;
+            $status->child_count = 0;
             return $status;
         }
 
@@ -91,10 +100,14 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
-                         count(engagement.status_id) as like_count
+                         count(engagement.status_id) as like_count,
+                         count(distinct child_status.status_id) as child_count
                   from status
                        join user on user.username=status.username
-                       left join engagement on status.status_id=engagement.status_id
+                       left join engagement 
+                            on status.status_id=engagement.status_id
+                       left join status child_status 
+                            on child_status.parent_status_id=status.status_id
                   where status.username=?
                     and status.status_id<?
                   group by status.status_id
@@ -121,7 +134,8 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
-                         count(engagement.status_id) as like_count
+                         count(engagement.status_id) as like_count,
+                         count(distinct child_status.status_id) as child_count
                   from status
                        join user on status.username = user.username
                        left join connection 
@@ -130,6 +144,8 @@ class Status
                            and connection.following_username=status.username
                        left join engagement 
                             on status.status_id=engagement.status_id
+                       left join status child_status 
+                            on child_status.parent_status_id=status.status_id
                   where status.status_id<?
                     and status.parent_status_id is null 
                     and (connection.connection_id is not null 
@@ -159,11 +175,14 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
-                         count(engagement.status_id) as like_count
+                         count(engagement.status_id) as like_count,
+                         count(distinct child_status.status_id) as child_count
                   from status
                        join user on status.username=user.username
                        left join engagement 
                             on status.status_id=engagement.status_id
+                       left join status child_status 
+                            on child_status.parent_status_id=status.status_id
                   where status.parent_status_id=?
                     and status.status_id<?
                   group by status.status_id
@@ -178,6 +197,19 @@ class Status
             while ($res = $result->fetch_object(Status::class)) {
                 yield $res;
             }
+        }
+    }
+
+    /**
+     * @return Status[]
+     */
+    public static function get_ancestors(int $descendant_status_id): iterable
+    {
+        $status = self::get($descendant_status_id);
+
+        while ($status->parent_status_id != null) {
+            $status = self::get($status->parent_status_id);
+            yield $status;
         }
     }
 }

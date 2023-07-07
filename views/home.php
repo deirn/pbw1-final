@@ -67,7 +67,7 @@ $page_title = "Home";
 
     postStatusButton.click(function () {
         $.post("/api/post_status", {
-            "content": statusInput.val().trim()
+            content: statusInput.val().trim()
         }, function (json) {
             const data = JSON.parse(json);
             const {status_id} = data;
