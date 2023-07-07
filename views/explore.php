@@ -22,7 +22,6 @@ $page_title = "Explore";
 </div>
 
 <?php PhpComponents::footer(); ?>
-<?php JsComponents::tooltip(); ?>
 
 </body>
 </html>

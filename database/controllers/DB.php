@@ -2,11 +2,14 @@
 
 namespace Database\Controllers;
 
+use DateTime;
 use mysqli;
 use mysqli_stmt;
 
 class DB
 {
+    public const DATE_FORMAT = 'Y-m-d H:i:s';
+
     private static ?mysqli $connection = null;
 
     public static function connection(): mysqli
@@ -49,5 +52,10 @@ class DB
                 $res->free();
             }
         } while ($connection->more_results() && $connection->next_result());
+    }
+
+    public static function create_date_time_string(DateTime $date_time = new DateTime()): string
+    {
+        return $date_time->format(self::DATE_FORMAT);
     }
 }

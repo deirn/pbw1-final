@@ -136,17 +136,16 @@ $page_title = "{$user->display_name} (@{$user->username})";
 </div>
 
 <?php PhpComponents::footer(); ?>
-<?php JsComponents::tooltip(); ?>
 <?php JsComponents::status(); ?>
 
 <script>
     const viewedUsername = "<?= $user->username ?>";
 
-    function fetchStatus(idAfter) {
+    function fetchStatus(idBefore) {
         $.get("/api/get_profile_status", {
             username: viewedUsername,
-            id_before: idAfter
-        }, statusHandler);
+            id_before: idBefore
+        }, statusResponseHandler);
     }
 
     $(window).scroll(function () {

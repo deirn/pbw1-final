@@ -12,13 +12,8 @@ if ($user_cookie_base64 == null) {
 
     if ($user != null && $user->password == $user_cookie['password']) {
         $_SESSION['username'] = $user->username;
-        $_SESSION['display_name'] = $user->display_name;
-        $_SESSION['avatar'] = $user->avatar;
         header("Refresh:0");
     } else {
         header("Location: /auth");
     }
 }
-
-
-

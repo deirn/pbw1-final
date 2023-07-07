@@ -8,3 +8,4 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 session_start();
+date_default_timezone_set("UTC");

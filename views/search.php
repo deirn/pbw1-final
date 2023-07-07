@@ -22,7 +22,6 @@ $page_title = "Search";
 </div>
 
 <?php PhpComponents::footer(); ?>
-<?php JsComponents::tooltip(); ?>
 
 </body>
 </html>

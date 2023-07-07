@@ -3,10 +3,10 @@
 use Database\Controllers\Engagement;
 use Database\Controllers\Status;
 
-$username = $_GET['username'];
+$username = $_SESSION['username'];
 $id_before = $_GET['id_before'];
 
-$statuses = Status::get_status_from_followed($username, $id_before);
+$statuses = Status::get_status_from_user_and_followed($username, $id_before);
 $result = [];
 
 foreach ($statuses as $status) {

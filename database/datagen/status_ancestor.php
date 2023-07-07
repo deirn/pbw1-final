@@ -5,6 +5,7 @@ die('Already generated');
 require_once __DIR__ . '/../../index.php';
 require_once __DIR__ . '/output/GeneratedUsers.php';
 
+use Database\Controllers\DB;
 use Database\Datagen\Output\GeneratedUsers;
 use Faker\Factory;
 
@@ -37,7 +38,7 @@ foreach (GeneratedUsers::$output as $index => $user) {
 
     for ($i = 0; $i < $total_status; $i++) {
         $status_content = $faker->text(280);
-        $created_at = $faker->dateTimeBetween('-2 month')->format('Y-m-d H:i:s');
+        $created_at = DB::create_date_time_string($faker->dateTimeBetween('-2 month'));
 
         // language=php
         $entry = <<<EOL

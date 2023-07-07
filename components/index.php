@@ -51,7 +51,7 @@ class CssComponents
 
 /**
  * @method static status
- * @method static tooltip
+ * @method static root
  */
 class JsComponents
 {
