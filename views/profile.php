@@ -112,7 +112,7 @@ $page_title = "{$user->display_name} (@{$user->username})";
         </div>
 
           <?php if ($user->bio != null) { ?>
-            <div><?= $user->bio ?></div>
+            <div class="text-break"><?= $user->bio ?></div>
           <?php } ?>
 
         <div class="d-flex gap-3">

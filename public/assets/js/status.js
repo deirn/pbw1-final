@@ -54,7 +54,7 @@ function createStatusDiv({username, status_id, status_content, created_at, displ
               <div class="font-monospace text-body-tertiary">#${status_id}</div>
             </div>
 
-            <div>${status_content}</div>
+            <div class="text-break">${status_content}</div>
           </div>
           <div class="c-status-buttons d-flex gap-3">
             <div>
