@@ -3,10 +3,10 @@
 use Database\Controllers\Engagement;
 use Database\Controllers\Status;
 
-$username = $_GET['username'];
+$parent_status_id = $_GET['parent_status_id'];
 $id_before = $_GET['id_before'];
 
-$statuses = Status::get_from_user($username, $id_before);
+$statuses = Status::get_child($parent_status_id, $id_before);
 $result = [];
 
 foreach ($statuses as $status) {

@@ -71,13 +71,26 @@ function createStatusDiv({username, status_id, status_content, created_at, displ
 }
 
 function setupStatusEventHandler(statusId) {
-    $(`#status-${statusId} .c-like`).click(function () {
+    const status = $(`#status-${statusId}`);
+
+    status.click(function () {
+        if (hasTextSelected()) return;
+
+        window.location.href = `/status/${statusId}`;
+    });
+
+    status.find(".c-like").click(function () {
         likeButtonClick(statusId);
+    });
+
+    status.find("button").click(function (e) {
+        e.stopPropagation();
     });
 }
 
 function statusResponseHandler(json) {
     const data = JSON.parse(json);
+    console.log(data);
 
     for (let i = 0; i < data.length; i++) {
         const {status_id} = data[i];

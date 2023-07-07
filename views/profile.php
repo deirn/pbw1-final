@@ -107,7 +107,7 @@ $page_title = "{$user->display_name} (@{$user->username})";
         <div>
           <div class="fw-bold fs-5"><?= $user->display_name ?></div>
 
-            <?php PhpComponents::profile_username($user) ?>
+            <?php PhpComponents::profile_username($user->username) ?>
 
         </div>
 
@@ -128,9 +128,7 @@ $page_title = "{$user->display_name} (@{$user->username})";
       </div>
     </div>
 
-    <div class="d-flex flex-column" id="status-container">
-
-    </div>
+    <div class="d-flex flex-column" id="status-container"></div>
 
   </div>
 </div>

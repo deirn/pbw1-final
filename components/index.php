@@ -21,7 +21,7 @@ function get_typed_arg(int $index, string $type = stdClass::class): object|null
  * @method static footer
  * @method static navbar
  * @method static profile_header(User $user)
- * @method static profile_username(User $user)
+ * @method static profile_username(string $username)
  */
 class PhpComponents
 {

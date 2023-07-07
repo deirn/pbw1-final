@@ -111,7 +111,7 @@ $page_title = $is_following_tab
                       <?= $connection_user->display_name ?>
                   </a>
 
-                    <?php PhpComponents::profile_username($connection_user) ?>
+                    <?php PhpComponents::profile_username($connection_user->username) ?>
 
                 </div>
 
@@ -150,6 +150,7 @@ $page_title = $is_following_tab
         const unfollowButton = user.find(".c-unfollow");
 
         user.click(function () {
+            if (hasTextSelected()) return;
             window.location.href = `/profile/${username}`;
         });
 

@@ -64,6 +64,11 @@ function handle_request(): void
             require __DIR__ . '/../views/connection.php';
             break;
 
+        // /status/[status_id]
+        case 1 == preg_match("/^\/status\/([0-9]+)$/", $request, $slug_matches):
+            require __DIR__ . '/../views/status.php';
+            break;
+
         default:
             $is_404 = true;
             break;

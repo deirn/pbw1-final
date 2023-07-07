@@ -8,4 +8,6 @@ function parseMysqlDateTime(dateTime) {
     return new Date(Date.UTC(split[0], split[1] - 1, split[2], split[3], split[4], split[5]));
 }
 
-
+function hasTextSelected() {
+    return window.getSelection().toString().length > 0;
+}

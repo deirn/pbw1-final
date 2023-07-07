@@ -3,7 +3,6 @@
 die('Already generated');
 
 require_once __DIR__ . '/../../index.php';
-require_once __DIR__ . '/output/GeneratedUsers.php';
 
 use Database\Controllers\DB;
 use Database\Datagen\Output\GeneratedUsers;

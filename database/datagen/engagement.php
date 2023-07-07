@@ -5,6 +5,7 @@ die('Already generated');
 require_once __DIR__ . '/../../index.php';
 
 use Database\Datagen\Output\GeneratedStatusAncestors;
+use Database\Datagen\Output\GeneratedStatusReplies;
 use Database\Datagen\Output\GeneratedUsers;
 
 $output_file = fopen(__DIR__ . '/output/GeneratedEngagements.php', 'w') or die('Unable to open file');
@@ -29,7 +30,7 @@ EOL;
 fwrite($output_file, $header);
 
 $status_id = 0;
-foreach (GeneratedStatusAncestors::$output as $status) {
+foreach ([...GeneratedStatusAncestors::$output, ...GeneratedStatusReplies::$output] as $status) {
     $status_id++;
     $total_engagement = rand(0, 5);
     $liking_username = [];

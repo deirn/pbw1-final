@@ -3,6 +3,7 @@
 namespace Database\Controllers;
 
 use DateTime;
+use DateTimeInterface;
 use mysqli;
 use mysqli_stmt;
 
@@ -54,7 +55,7 @@ class DB
         } while ($connection->more_results() && $connection->next_result());
     }
 
-    public static function create_date_time_string(DateTime $date_time = new DateTime()): string
+    public static function create_date_time_string(DateTimeInterface $date_time = new DateTime()): string
     {
         return $date_time->format(self::DATE_FORMAT);
     }
