@@ -1,5 +1,6 @@
 <?php
 
+use Database\Controllers\Engagement;
 use Database\Controllers\Status;
 
 global $page_title;
@@ -7,6 +8,7 @@ global $slug_matches;
 
 $status_id = $slug_matches[1];
 $status = Status::get($status_id);
+$liked_by_client = Engagement::is_status_liked($_SESSION['username'], $status_id);
 
 $page_title = "{$status->display_name}: \"{$status->status_content}\"";
 ?>
@@ -28,11 +30,14 @@ $page_title = "{$status->display_name}: \"{$status->status_content}\"";
   <div class="flex-grow-1 border-end" id="main">
     <div class="d-flex flex-column" id="ancestor-status-container"></div>
 
-    <div class="px-3 pt-3 d-flex flex-column gap-3" id="main-status">
+    <div class="px-3 d-flex flex-column gap-3" id="main-status">
       <div class="d-flex gap-3">
-        <div class="c-status-avatar flex-shrink-0 mb-auto"></div>
+        <div class="d-flex flex-column flex-shrink-0">
+          <div class="c-thread-line c-hidden" id="thread-line-before"></div>
+          <div class="c-status-avatar"></div>
+        </div>
 
-        <div class="d-flex flex-column flex-grow-1 gap-2">
+        <div class="pt-3 d-flex flex-column flex-grow-1 gap-2">
           <div>
             <div>
               <a href="/profile/<?= $status->username ?>"
@@ -53,8 +58,12 @@ $page_title = "{$status->display_name}: \"{$status->status_content}\"";
       <div class="text-break fs-5"><?= $status->status_content ?></div>
 
       <div class="text-break pb-3 border-bottom d-flex gap-4">
-        <div class="text-body-tertiary" id="main-status-date"></div>
-        <div><span class="fw-bold"><?= $status->like_count ?></span> Likes</div>
+        <div class="my-auto text-body-tertiary" id="main-status-date"></div>
+        <div class="my-auto"><span class="fw-bold" id="main-status-like-counter"><?= $status->like_count ?></span> Likes
+        </div>
+        <button class="c-status-like btn">
+          <i class="<?= $liked_by_client ? 'fa-solid' : 'fa-regular' ?> fa-fw fa-heart" id="main-status-heart"></i>
+        </button>
       </div>
     </div>
 
@@ -89,6 +98,8 @@ $page_title = "{$status->display_name}: \"{$status->status_content}\"";
 
     const main = $("#main");
     const mainStatus = $("#main-status");
+    const mainStatusLikeCounter = $("#main-status-like-counter");
+    const mainStatusHeart = $("#main-status-heart");
     const ancestorStatusContainer = $("#ancestor-status-container");
 
     const replyInput = $("#reply-input");
@@ -137,11 +148,43 @@ $page_title = "{$status->display_name}: \"{$status->status_content}\"";
 
             ancestorHeight += $(`#status-${status_id}`).outerHeight();
 
+            if (i < (data.length - 1)) {
+                $(`#status-${status_id} #thread-line-before`).removeClass("c-hidden");
+            }
+
             $(`#status-${status_id} #thread-line-after`).removeClass("c-hidden");
+        }
+
+        if (data.length > 0) {
+            mainStatus.find("#thread-line-before").removeClass("c-hidden");
         }
 
         main.css("min-height", (oldHeight + ancestorHeight) + "px");
         mainStatus.get(0).scrollIntoView();
+    });
+
+    mainStatus.find(".c-status-like").click(function () {
+        $.post("/api/like", {
+            status_id: <?= $status_id ?>
+        }, function (json) {
+            const data = JSON.parse(json);
+
+            const {
+                liked,
+                new_like_count
+            } = data;
+
+            if (new_like_count !== undefined) {
+                mainStatusLikeCounter.html(new_like_count);
+            }
+
+            if (liked) mainStatusHeart
+                .removeClass("fa-regular")
+                .addClass("fa-solid");
+            else mainStatusHeart
+                .removeClass("fa-solid")
+                .addClass("fa-regular")
+        });
     });
 
     function fetchReply(idBefore) {

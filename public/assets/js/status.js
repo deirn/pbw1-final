@@ -46,7 +46,7 @@ function createStatusDiv({status_id, username, status_content, created_at, displ
           <div class="c-status-avatar"></div>
           <div class="c-thread-line c-hidden flex-grow-1" id="thread-line-after"></div>
         </div>
-        
+
         <div class="d-flex py-3 flex-column gap-2 flex-grow-1">
           <div>
             <div class="d-flex gap-2">
@@ -63,10 +63,12 @@ function createStatusDiv({status_id, username, status_content, created_at, displ
           </div>
           <div class="c-status-buttons d-flex gap-3">
             <div>
-              <button class="c-comment btn"><i class="fa-regular fa-fw fa-comment"></i> ${child_count}</button>
+              <a href="/status/${status_id}" class="c-comment btn">
+                <i class="fa-regular fa-fw fa-comment"></i> ${child_count}
+              </a>
             </div>
             <div>
-              <button class="c-like btn">
+              <button class="c-status-like btn">
                 <i class="${heartStyle} fa-fw fa-heart" id="heart"></i> <span id="like-count">${like_count}</span>
               </button>
             </div>
@@ -84,7 +86,7 @@ function setupStatusEventHandler(statusId) {
         window.location.href = `/status/${statusId}`;
     });
 
-    status.find(".c-like").click(function () {
+    status.find(".c-status-like").click(function () {
         likeButtonClick(statusId);
     });
 

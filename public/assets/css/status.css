@@ -14,18 +14,18 @@
     width: 5em;
 }
 
-.c-status-buttons .c-like, .c-status-buttons .c-comment {
+.c-status-like, .c-status-buttons .c-comment {
     text-align: left;
     line-height: 1.25em;
     padding: 0.25em;
     border-radius: 3em;
 }
 
-.c-status-buttons .c-like {
+.c-status-like {
     color: var(--bs-danger) !important;
 }
 
-.c-status-buttons .c-like:hover {
+.c-status-like:hover {
     background-color: var(--bs-danger-bg-subtle);
 }
 
@@ -37,13 +37,21 @@
     background-color: var(--bs-secondary-bg-subtle);
 }
 
-.c-status .c-thread-line {
+.c-thread-line {
     margin: 0 auto;
     min-height: 1em;
     width: 2px;
-    background-color: var(--bs-border-color);
+    background-color: var(--bs-dark-border-subtle);
 }
 
-.c-status .c-thread-line.c-hidden {
+.c-thread-line#thread-line-before {
+    transform: translate(0, -1px);
+}
+
+.c-thread-line#thread-line-after {
+    transform: translate(0, 1px);
+}
+
+.c-thread-line.c-hidden {
     width: 0;
 }
