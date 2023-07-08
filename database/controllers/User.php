@@ -25,6 +25,50 @@ class User
         return null;
     }
 
+    /**
+     * @return User[]
+     */
+    public static function search(string $query_string): iterable
+    {
+
+        // language=mariadb
+        $query = "select * from user
+                  where username like ?
+                     or display_name like ?
+                  limit 10";
+        $query_string = "%{$query_string}%";
+        $statement = DB::prepare_statement($query, "ss", $query_string, $query_string);
+        $statement->execute();
+        $result = $statement->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($res = $result->fetch_object(User::class)) {
+                yield $res;
+            }
+        }
+    }
+
+    /**
+     * @return User[]
+     */
+    public static function search_username(string $query_username): iterable
+    {
+        // language=mariadb
+        $query = "select * from user
+                  where username like ?
+                  limit 10";
+        $query_username = "%{$query_username}%";
+        $statement = DB::prepare_statement($query, "s", $query_username);
+        $statement->execute();
+        $result = $statement->get_result();
+
+        if ($result->num_rows > 0) {
+            while ($res = $result->fetch_object(User::class)) {
+                yield $res;
+            }
+        }
+    }
+
     public static function create(string $username, string $password, string $display_name, ?string $bio = null): ?User
     {
         // language=mariadb

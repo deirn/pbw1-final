@@ -26,6 +26,17 @@ class Connection
         return null;
     }
 
+    public static function is_present(string $follower_username, string $following_username): bool
+    {
+        // language=mariadb
+        $query = "select count(*) from connection where follower_username=? and following_username=?";
+        $statement = DB::prepare_statement($query, "ss", $follower_username, $following_username);
+        $statement->execute();
+        $result = $statement->get_result();
+
+        return $result->fetch_row()[0] > 0;
+    }
+
     public static function create(string $follower_username, string $following_username): ?Connection
     {
         // language=mariadb

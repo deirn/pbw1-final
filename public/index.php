@@ -42,10 +42,6 @@ function handle_request(): void
             require __DIR__ . '/../views/home.php';
             break;
 
-        case '/explore':
-            require __DIR__ . '/../views/explore.php';
-            break;
-
         case '/search':
             require __DIR__ . '/../views/search.php';
             break;

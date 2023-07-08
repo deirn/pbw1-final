@@ -27,15 +27,6 @@ function active_class(string $title): string
     </li>
 
     <li class="nav-item">
-      <a href="/explore" class="c-nav-icon nav-link <?= active_class("Explore") ?>"
-         aria-current="page" title=""
-         data-bs-toggle="tooltip"
-         data-bs-placement="right" data-bs-title="Explore">
-        <i class="fa-solid fa-fw fa-compass"></i>
-      </a>
-    </li>
-
-    <li class="nav-item">
       <a href="/search" class="c-nav-icon nav-link <?= active_class("Search") ?>"
          aria-current="page" title=""
          data-bs-toggle="tooltip"
