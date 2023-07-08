@@ -1,3 +1,10 @@
+# Endless Suffering
+
+A Twitter-like social media app written in vanilla PHP.
+Made as a final project for the web dev class at my university.
+
+Unnecessarily complex because I like pain, and regular CRUD app is just plain boring.
+
 ## Running Locally using XAMPP in Windows
 
 1. Install [XAMPP](https://www.apachefriends.org/) and [Composer](https://getcomposer.org/).
