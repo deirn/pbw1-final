@@ -216,6 +216,22 @@ class Status
         }
     }
 
+    public function edit(string $status_content, string $updated_at): Status
+    {
+        // language=mariadb
+        $query = "update status set status_content=?,
+                                    updated_at=?
+                  where status_id=?";
+        $statement = DB::prepare_statement($query, "ssi", $status_content, $updated_at, $this->status_id);
+
+        if ($statement->execute()) {
+            $this->status_content = $status_content;
+            $this->updated_at = $updated_at;
+        }
+
+        return $this;
+    }
+
     public function delete(): void
     {
         // language=mariadb

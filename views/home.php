@@ -69,10 +69,10 @@ $page_title = "Home";
         $.post("/api/post_status", {
             content: statusInput.val().trim()
         }, function (data) {
-            const {status_id} = data;
+            const {status_id, status_content} = data;
             const statusDiv = createStatusDiv(data);
             statusContainer.prepend(statusDiv);
-            setupStatusEventHandler(status_id);
+            setupStatusDiv(status_id, status_content);
             statusInput.val("");
             statusInput.keyup();
         });

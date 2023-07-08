@@ -28,23 +28,32 @@ function likeButtonClick(statusId) {
 }
 
 function formatStatusDate(date) {
-    return `${date.getHours()}:${date.getMinutes()} - ${monthName[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    const hours = `${date.getHours()}`.padStart(2, "0");
+    const minutes = `${date.getMinutes()}`.padStart(2, "0");
+
+    return `${hours}:${minutes} - ${monthName[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
-function createStatusDiv({
-                             status_id,
-                             username,
-                             status_content,
-                             created_at,
-                             display_name,
-                             like_count,
-                             child_count,
-                             liked_by_client,
-                             deleted
-                         }) {
+function createStatusDiv(data) {
+    const {
+        status_id,
+        username,
+        created_at,
+        updated_at,
+        display_name,
+        like_count,
+        child_count,
+        liked_by_client,
+        deleted
+    } = data;
+
     const heartStyle = liked_by_client ? "fa-solid" : "fa-regular";
     const date = deleted ? null : parseMysqlDateTime(created_at);
     const dateString = deleted ? null : formatStatusDate(date);
+
+    // language=html
+    const updatedIcon = updated_at === null ? "" : `
+      <i class="fa-solid fa-xs fa-pen"></i>`;
 
     // language=html
     const inner = !deleted ? `
@@ -62,11 +71,11 @@ function createStatusDiv({
               ${display_name}
             </a>
             <div class="font-monospace text-body-secondary">@${username}</div>
-            <div class="text-body-tertiary flex-grow-1">${dateString}</div>
+            <div class="text-body-tertiary flex-grow-1">${dateString} ${updatedIcon}</div>
             <div class="font-monospace text-body-tertiary">#${status_id}</div>
           </div>
 
-          <div class="text-break">${status_content}</div>
+          <div class="text-break" id="status-content"></div>
         </div>
         <div class="c-status-buttons d-flex gap-3">
           <div>
@@ -92,7 +101,7 @@ function createStatusDiv({
       </div>`;
 }
 
-function setupStatusEventHandler(statusId) {
+function setupStatusDiv(statusId, statusContent) {
     const status = $(`#status-${statusId}`);
 
     status.click(function () {
@@ -100,6 +109,8 @@ function setupStatusEventHandler(statusId) {
 
         window.location.href = `/status/${statusId}`;
     });
+
+    status.find("#status-content").text(statusContent);
 
     status.find(".c-status-like").click(function () {
         likeButtonClick(statusId);
@@ -112,11 +123,11 @@ function setupStatusEventHandler(statusId) {
 
 function statusResponseHandler(data) {
     for (let i = 0; i < data.length; i++) {
-        const {status_id} = data[i];
+        const {status_id, status_content} = data[i];
         const statusDiv = createStatusDiv(data[i]);
 
         statusContainer.append(statusDiv);
-        setupStatusEventHandler(status_id);
+        setupStatusDiv(status_id, status_content);
 
         earliestStatusId = status_id;
     }
