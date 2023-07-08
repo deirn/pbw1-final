@@ -33,47 +33,64 @@ function formatStatusDate(date) {
     return `${date.getHours()}:${date.getMinutes()} - ${monthName[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
-function createStatusDiv({status_id, username, status_content, created_at, display_name, like_count, child_count, liked_by_client}) {
+function createStatusDiv({
+                             status_id,
+                             username,
+                             status_content,
+                             created_at,
+                             display_name,
+                             like_count,
+                             child_count,
+                             liked_by_client,
+                             deleted
+                         }) {
     const heartStyle = liked_by_client ? "fa-solid" : "fa-regular";
-    const date = parseMysqlDateTime(created_at);
-    const dateString = formatStatusDate(date);
+    const date = deleted ? null : parseMysqlDateTime(created_at);
+    const dateString = deleted ? null : formatStatusDate(date);
+
+    // language=html
+    const inner = !deleted ? `
+      <div class="d-flex flex-column flex-shrink-0">
+        <div class="c-thread-line c-hidden" id="thread-line-before"></div>
+        <div class="c-status-avatar"></div>
+        <div class="c-thread-line c-hidden flex-grow-1" id="thread-line-after"></div>
+      </div>
+
+      <div class="d-flex py-3 flex-column gap-2 flex-grow-1">
+        <div>
+          <div class="d-flex gap-2">
+            <a href="/profile/${username}"
+               class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
+              ${display_name}
+            </a>
+            <div class="font-monospace text-body-secondary">@${username}</div>
+            <div class="text-body-tertiary flex-grow-1">${dateString}</div>
+            <div class="font-monospace text-body-tertiary">#${status_id}</div>
+          </div>
+
+          <div class="text-break">${status_content}</div>
+        </div>
+        <div class="c-status-buttons d-flex gap-3">
+          <div>
+            <a href="/status/${status_id}" class="c-status-button c-comment btn">
+              <i class="fa-regular fa-fw fa-comment"></i> ${child_count}
+            </a>
+          </div>
+          <div>
+            <button class="c-status-button c-status-like btn">
+              <i class="${heartStyle} fa-fw fa-heart" id="heart"></i> <span id="like-count">${like_count}</span>
+            </button>
+          </div>
+        </div>
+      </div>` : `
+      <div class="p-3 text-center flex-grow-1">
+        Status Deleted
+      </div>`;
 
     // language=html
     return `
       <div class="c-status px-3 d-flex gap-3 border-bottom" id="status-${status_id}">
-        <div class="d-flex flex-column flex-shrink-0">
-          <div class="c-thread-line c-hidden" id="thread-line-before"></div>
-          <div class="c-status-avatar"></div>
-          <div class="c-thread-line c-hidden flex-grow-1" id="thread-line-after"></div>
-        </div>
-
-        <div class="d-flex py-3 flex-column gap-2 flex-grow-1">
-          <div>
-            <div class="d-flex gap-2">
-              <a href="/profile/${username}"
-                 class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
-                ${display_name}
-              </a>
-              <div class="font-monospace text-body-secondary">@${username}</div>
-              <div class="text-body-tertiary flex-grow-1">${dateString}</div>
-              <div class="font-monospace text-body-tertiary">#${status_id}</div>
-            </div>
-
-            <div class="text-break">${status_content}</div>
-          </div>
-          <div class="c-status-buttons d-flex gap-3">
-            <div>
-              <a href="/status/${status_id}" class="c-comment btn">
-                <i class="fa-regular fa-fw fa-comment"></i> ${child_count}
-              </a>
-            </div>
-            <div>
-              <button class="c-status-like btn">
-                <i class="${heartStyle} fa-fw fa-heart" id="heart"></i> <span id="like-count">${like_count}</span>
-              </button>
-            </div>
-          </div>
-        </div>
+        ${inner}
       </div>`;
 }
 

@@ -14,11 +14,16 @@
     width: 5em;
 }
 
-.c-status-like, .c-status-buttons .c-comment {
+.c-status-button {
     text-align: left;
     line-height: 1.25em;
     padding: 0.25em;
     border-radius: 3em;
+    color: var(--bs-secondary)
+}
+
+.c-status-button:hover {
+    background-color: var(--bs-secondary-bg-subtle);
 }
 
 .c-status-like {
@@ -27,14 +32,6 @@
 
 .c-status-like:hover {
     background-color: var(--bs-danger-bg-subtle);
-}
-
-.c-status-buttons .c-comment {
-    color: var(--bs-secondary) !important;
-}
-
-.c-status-buttons .c-comment:hover {
-    background-color: var(--bs-secondary-bg-subtle);
 }
 
 .c-thread-line {

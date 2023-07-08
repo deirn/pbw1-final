@@ -44,11 +44,12 @@ create or replace table status
 (
     status_id        int auto_increment
         primary key,
-    username         varchar(15)  not null,
+    username         varchar(15)  null,
     parent_status_id int          null,
-    status_content   varchar(280) not null,
-    created_at       datetime     not null,
-    updated_at       datetime     null
+    status_content   varchar(280) null,
+    created_at       datetime     null,
+    updated_at       datetime     null,
+    deleted          bool         not null default 0
 );
 
 alter table attachment

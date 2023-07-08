@@ -5,11 +5,12 @@ namespace Database\Controllers;
 class Status
 {
     public int $status_id;
-    public string $username;
+    public ?string $username;
     public ?int $parent_status_id;
-    public string $status_content;
-    public string $created_at;
+    public ?string $status_content;
+    public ?string $created_at;
     public ?string $updated_at;
+    public bool $deleted;
 
     // table: user
     public ?string $display_name;
@@ -24,10 +25,10 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
-                         count(engagement.status_id) as like_count,
+                         count(distinct engagement.engagement_id) as like_count,
                          count(distinct child_status.status_id) as child_count
                   from status
-                       join user on user.username=status.username
+                       left join user on user.username=status.username
                        left join engagement 
                             on status.status_id=engagement.status_id
                        left join status child_status 
@@ -62,6 +63,7 @@ class Status
             $status->updated_at = null;
             $status->like_count = 0;
             $status->child_count = 0;
+            $status->deleted = false;
             return $status;
         }
 
@@ -84,6 +86,7 @@ class Status
             $status->updated_at = null;
             $status->like_count = 0;
             $status->child_count = 0;
+            $status->deleted = false;
             return $status;
         }
 
@@ -100,10 +103,10 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
-                         count(engagement.status_id) as like_count,
+                         count(distinct engagement.engagement_id) as like_count,
                          count(distinct child_status.status_id) as child_count
                   from status
-                       join user on user.username=status.username
+                       left join user on user.username=status.username
                        left join engagement 
                             on status.status_id=engagement.status_id
                        left join status child_status 
@@ -134,10 +137,10 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
-                         count(engagement.status_id) as like_count,
+                         count(distinct engagement.engagement_id) as like_count,
                          count(distinct child_status.status_id) as child_count
                   from status
-                       join user on status.username = user.username
+                       left join user on status.username = user.username
                        left join connection 
                             on connection.follower_username=?
                            and connection.following_username=user.username
@@ -175,10 +178,10 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
-                         count(engagement.status_id) as like_count,
+                         count(distinct engagement.engagement_id) as like_count,
                          count(distinct child_status.status_id) as child_count
                   from status
-                       join user on status.username=user.username
+                       left join user on status.username=user.username
                        left join engagement 
                             on status.status_id=engagement.status_id
                        left join status child_status 
@@ -211,5 +214,18 @@ class Status
             $status = self::get($status->parent_status_id);
             yield $status;
         }
+    }
+
+    public function delete(): void
+    {
+        // language=mariadb
+        $query = "update status set username=null,
+                                    status_content=null,
+                                    created_at=null,
+                                    updated_at=null,
+                                    deleted=true
+                  where status_id=?";
+        $statement = DB::prepare_statement($query, "i", $this->status_id);
+        $statement->execute();
     }
 }
