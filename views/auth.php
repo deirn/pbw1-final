@@ -88,7 +88,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
           }, function (data) {
               if (data["error_field"] !== undefined) {
                   $(`#${data["error_field"]}`).addClass("border-danger");
-                  $(`.c-hint.${data["error_field"]}`).html(`${data["error_msg"]}`);
+                  $(`.c-error-text.${data["error_field"]}`).html(`${data["error_msg"]}`);
               } else {
                   window.top.location = "/auth";
               }
@@ -107,7 +107,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
           }, function (data) {
               if (data["error_field"] !== undefined) {
                   $(`#${data["error_field"]}`).addClass("border-danger");
-                  $(`.c-hint.${data["error_field"]}`).html(`${data["error_msg"]}`);
+                  $(`.c-error-text.${data["error_field"]}`).html(`${data["error_msg"]}`);
               } else {
                   window.top.location = "/";
               }
