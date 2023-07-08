@@ -2,6 +2,8 @@
 
 use Database\Controllers\User;
 
+global $request_uri;
+
 $user_cookie_base64 = $_COOKIE['login'] ?? null;
 
 if ($user_cookie_base64 == null) {
@@ -12,7 +14,12 @@ if ($user_cookie_base64 == null) {
 
     if ($user != null && $user->password == $user_cookie['password']) {
         $_SESSION['username'] = $user->username;
-        header("Refresh:0");
+
+        if ($request_uri == '/api/auth') {
+            header("Location: /");
+        } else {
+            header("Refresh:0");
+        }
     } else {
         header("Location: /auth");
     }

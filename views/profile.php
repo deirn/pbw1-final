@@ -9,7 +9,8 @@ global $page_title;
 $client_username = $_SESSION['username'];
 $slug_username = $slug_matches[1];
 
-$user = User::get($slug_username);
+$user = User::get($slug_username) or not_found();
+
 $followers = Connection::get_followers_count($user->username);
 $following = Connection::get_following_count($user->username);
 

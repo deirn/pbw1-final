@@ -5,7 +5,7 @@ use Database\Controllers\User;
 global $page_title;
 
 $client_username = $_SESSION['username'];
-$user = User::get($client_username);
+$user = User::get($client_username) or not_found();
 
 $page_title = "Profile Settings";
 ?>
@@ -17,9 +17,6 @@ $page_title = "Profile Settings";
     <?php PhpComponents::header(); ?>
     <?php CssComponents::navbar(); ?>
     <?php CssComponents::profile_header(); ?>
-
-  <style>
-  </style>
 </head>
 
 <body>

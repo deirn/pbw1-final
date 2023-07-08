@@ -9,7 +9,7 @@ global $slug_matches;
 $client_username = $_SESSION['username'];
 
 $status_id = $slug_matches[1];
-$status = Status::get($status_id);
+$status = Status::get($status_id) or not_found();
 $status_by_client = !$status->deleted && $status->username == $client_username;
 $liked_by_client = Engagement::is_status_liked($client_username, $status_id);
 
