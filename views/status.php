@@ -230,7 +230,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
             status_id: <?= $status_id ?>
         }, function (json) {
             console.log(json);
-            // window.location.reload();
+            window.location.reload();
         });
     });
 
