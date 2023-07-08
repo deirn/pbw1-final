@@ -128,7 +128,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
 
             <div class="d-flex gap-3">
               <div class="flex-grow-1"></div>
-              <div class="my-auto"><span id="status-input-counter">0</span>/280</div>
+              <div class="my-auto"><span id="reply-input-counter">0</span>/280</div>
               <button class="btn btn-primary fw-bold" id="post-reply" disabled>Reply</button>
             </div>
           </div>
