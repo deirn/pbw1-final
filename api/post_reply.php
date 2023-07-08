@@ -13,6 +13,7 @@ $user = User::get($username);
 $status = Status::create_child($username, $parent_status_id, $content, $created_at);
 $status->display_name = $user->display_name;
 
+header('Content-Type: application/json');
 echo json_encode([
     ...(array)$status,
     'liked_by_client' => false

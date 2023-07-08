@@ -71,9 +71,7 @@ $page_title = "Profile Settings";
             username: clientUsername,
             display_name: displayName.val(),
             bio: bio.val().trim()
-        }, function (json) {
-            const data = JSON.parse(json);
-
+        }, function (data) {
             if (data["error_field"] !== undefined) {
                 $(`#${data["error_field"]}`).addClass("border-danger");
                 $(`.c-hint.${data["error_field"]}`).html(`${data["error_msg"]}`);

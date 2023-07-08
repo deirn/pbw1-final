@@ -5,6 +5,8 @@ use Database\Controllers\User;
 $username = $_POST['username'];
 $password = $_POST['password'];
 
+header('Content-Type: application/json');
+
 if ($username == "") {
     echo json_encode([
         "error_field" => "username",

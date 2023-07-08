@@ -151,8 +151,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
         $.post("/api/post_reply", {
             parent_status_id: <?= $status_id ?>,
             content: replyInput.val().trim()
-        }, function (json) {
-            const data = JSON.parse(json);
+        }, function (data) {
             const {status_id} = data;
 
             const statusDiv = createStatusDiv(data);
@@ -169,8 +168,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
 
     $.get("/api/get_status_ancestor", {
         status_id: <?= $status_id ?>
-    }, function (json) {
-        const data = JSON.parse(json);
+    }, function (data) {
         const oldHeight = main.height();
         let ancestorHeight = 0;
 
@@ -201,9 +199,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
     mainStatus.find(".c-status-like").click(function () {
         $.post("/api/like", {
             status_id: <?= $status_id ?>
-        }, function (json) {
-            const data = JSON.parse(json);
-
+        }, function (data) {
             const {
                 liked,
                 new_like_count

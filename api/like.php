@@ -15,6 +15,7 @@ if ($engagement != null) {
     $liked = true;
 }
 
+header('Content-Type: application/json');
 echo json_encode([
     'liked' => $liked,
     'new_like_count' => Engagement::count($status_id)

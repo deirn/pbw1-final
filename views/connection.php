@@ -165,9 +165,7 @@ $page_title = $is_following_tab
                     type,
                     follower: clientUsername,
                     following: username
-                }, function (json) {
-                    const data = JSON.parse(json);
-
+                }, function (data) {
                     if (data["follower_count"] !== undefined) {
                         user.data("followed", !user.data("followed"));
                         toggleButtons();

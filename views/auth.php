@@ -85,9 +85,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
               password: password.val(),
               repeat_password: repeatPassword.val(),
               display_name: displayName.val()
-          }, function (json) {
-              const data = JSON.parse(json);
-
+          }, function (data) {
               if (data["error_field"] !== undefined) {
                   $(`#${data["error_field"]}`).addClass("border-danger");
                   $(`.c-hint.${data["error_field"]}`).html(`${data["error_msg"]}`);
@@ -106,9 +104,7 @@ $page_title = $new ? 'Sign Up' : 'Login';
           $.post("/api/login", {
               username: username.val(),
               password: password.val(),
-          }, function (json) {
-              const data = JSON.parse(json);
-
+          }, function (data) {
               if (data["error_field"] !== undefined) {
                   $(`#${data["error_field"]}`).addClass("border-danger");
                   $(`.c-hint.${data["error_field"]}`).html(`${data["error_msg"]}`);

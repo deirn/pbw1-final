@@ -7,6 +7,8 @@ $password = $_POST['password'];
 $repeat_password = $_POST['repeat_password'];
 $display_name = $_POST['display_name'];
 
+header('Content-Type: application/json');
+
 if ($display_name == "") {
     echo json_encode([
         "error_field" => "display_name",

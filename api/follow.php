@@ -15,6 +15,7 @@ if ($type == 'follow') {
     $connection?->delete();
 }
 
+header('Content-Type: application/json');
 echo json_encode([
     'follower_count' => Connection::get_followers_count($following)
 ]);

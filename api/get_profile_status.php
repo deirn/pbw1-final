@@ -15,4 +15,5 @@ foreach ($statuses as $status) {
     $result[] = $entry;
 }
 
+header('Content-Type: application/json');
 echo json_encode($result);

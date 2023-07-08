@@ -6,9 +6,7 @@ let earliestStatusId = 0;
 function likeButtonClick(statusId) {
     $.post("/api/like", {
         status_id: statusId
-    }, function (json) {
-        const data = JSON.parse(json);
-
+    }, function (data) {
         const {
             liked,
             new_like_count
@@ -112,10 +110,7 @@ function setupStatusEventHandler(statusId) {
     });
 }
 
-function statusResponseHandler(json) {
-    const data = JSON.parse(json);
-    console.log(data);
-
+function statusResponseHandler(data) {
     for (let i = 0; i < data.length; i++) {
         const {status_id} = data[i];
         const statusDiv = createStatusDiv(data[i]);

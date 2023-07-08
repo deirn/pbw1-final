@@ -173,9 +173,7 @@ $page_title = "{$user->display_name} (@{$user->username})";
                   type,
                   follower: clientUsername,
                   following: viewedUsername
-              }, function (json) {
-                  const data = JSON.parse(json);
-
+              }, function (data) {
                   if (data["follower_count"] !== undefined) {
                       followed = !followed;
                       $("#follower-count").html(data["follower_count"]);
