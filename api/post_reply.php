@@ -12,6 +12,7 @@ $created_at = DB::create_date_time_string();
 $user = User::get_by_username($username);
 $status = Status::create_child($username, $parent_status_id, $content, $created_at);
 $status->display_name = $user->display_name;
+$status->avatar = $user->avatar;
 
 header('Content-Type: application/json');
 echo json_encode([

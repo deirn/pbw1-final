@@ -60,9 +60,9 @@ function createStatusDiv(data) {
     const inner = !deleted ? `
       <div class="d-flex flex-column flex-shrink-0">
         <div class="c-thread-line c-hidden" id="thread-line-before"></div>
-        <div class="c-status-avatar">
+        <a href="/profile/${username}" class="c-status-avatar">
           <img src="/assets/media/avatar/${avatar}" alt="">
-        </div>
+        </a>
         <div class="c-thread-line c-hidden flex-grow-1" id="thread-line-after"></div>
       </div>
 

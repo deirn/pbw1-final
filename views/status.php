@@ -40,9 +40,9 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
           <div class="d-flex gap-3">
             <div class="d-flex flex-column flex-shrink-0">
               <div class="c-thread-line c-hidden" id="thread-line-before"></div>
-              <div class="c-status-avatar">
+              <a href="/profile/<?= $status->username ?>" class="c-status-avatar">
                 <img src="/assets/media/avatar/<?= $status->avatar ?>" alt="">
-              </div>
+              </a>
             </div>
 
             <div class="pt-3 d-flex flex-column flex-grow-1 gap-2">
