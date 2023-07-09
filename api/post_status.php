@@ -8,7 +8,7 @@ $username = $_SESSION['username'];
 $content = $_POST['content'];
 $created_at = DB::create_date_time_string();
 
-$user = User::get($username);
+$user = User::get_by_username($username);
 $status = Status::create_ancestor($username, $content, $created_at);
 $status->display_name = $user->display_name;
 $status->avatar = $user->avatar;

@@ -27,7 +27,7 @@ function handle_request(): void
         return;
     }
 
-    if (!isset($_SESSION['username']) || !isset($_COOKIE['login'])) {
+    if (!isset($_SESSION['username']) || !isset($_COOKIE['login2'])) {
         require __DIR__ . '/../api/auth.php';
         return;
     }

@@ -4,13 +4,29 @@ namespace Database\Controllers;
 
 class User
 {
+    public int $user_id;
     public string $username;
     public string $password;
     public string $display_name;
     public ?string $avatar;
     public ?string $bio;
 
-    public static function get(string $username): ?User
+    public static function get_by_id(int $user_id): ?User
+    {
+        // language=mariadb
+        $query = "select * from user where user_id=?";
+        $statement = DB::prepare_statement($query, "i", $user_id);
+        $statement->execute();
+        $result = $statement->get_result();
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_object(User::class);
+        }
+
+        return null;
+    }
+
+    public static function get_by_username(string $username): ?User
     {
         // language=mariadb
         $query = "select * from user where username=?";

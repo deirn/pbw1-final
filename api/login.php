@@ -28,7 +28,7 @@ if ($username == "") {
         "error_msg" => "Must be 5-15 characters long"
     ]);
 } else {
-    $user = User::get($username);
+    $user = User::get_by_username($username);
 
     if ($user == null) {
         echo json_encode([
@@ -41,8 +41,8 @@ if ($username == "") {
             "error_msg" => "Wrong password"
         ]);
     } else {
-        setcookie('login', base64_encode(json_encode([
-            "username" => $user->username,
+        setcookie('login2', base64_encode(json_encode([
+            "id" => $user->user_id,
             "password" => $user->password
         ])), time() + 60 * 60 * 24 * 30, '/');
         echo json_encode([]);

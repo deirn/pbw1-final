@@ -131,7 +131,7 @@ class Connection
     public function resolve_follower(): User
     {
         if ($this->_follower == null) {
-            $this->_follower = User::get($this->follower_username);
+            $this->_follower = User::get_by_username($this->follower_username);
         }
 
         return $this->_follower;
@@ -140,7 +140,7 @@ class Connection
     public function resolve_following(): User
     {
         if ($this->_following == null) {
-            $this->_following = User::get($this->following_username);
+            $this->_following = User::get_by_username($this->following_username);
         }
 
         return $this->_following;

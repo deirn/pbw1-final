@@ -9,7 +9,7 @@ $parent_status_id = $_POST['parent_status_id'];
 $content = $_POST['content'];
 $created_at = DB::create_date_time_string();
 
-$user = User::get($username);
+$user = User::get_by_username($username);
 $status = Status::create_child($username, $parent_status_id, $content, $created_at);
 $status->display_name = $user->display_name;
 

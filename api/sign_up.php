@@ -34,7 +34,7 @@ if ($display_name == "") {
         "error_field" => "username",
         "error_msg" => "Must be 5-15 characters long"
     ]);
-} elseif (User::get($username) != null) {
+} elseif (User::get_by_username($username) != null) {
     echo json_encode([
         "error_field" => "username",
         "error_msg" => "Already Used!"

@@ -4,8 +4,8 @@ global $page_title;
 $new = isset($_GET['new']);
 session_destroy();
 
-unset($_COOKIE['login']);
-setcookie('login', '', time() - 3600, '/');
+unset($_COOKIE['login2']);
+setcookie('login2', '', time() - 3600, '/');
 
 $page_title = $new ? 'Sign Up' : 'Login';
 ?>

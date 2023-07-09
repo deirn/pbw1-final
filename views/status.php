@@ -8,7 +8,7 @@ global $page_title;
 global $slug_matches;
 
 $client_username = $_SESSION['username'];
-$client_user = User::get($client_username) or not_found();
+$client_user = User::get_by_username($client_username) or not_found();
 
 $status_id = $slug_matches[1];
 $status = Status::get($status_id) or not_found();

@@ -12,7 +12,7 @@ $slug_type = $slug_matches[2];
 
 $is_following_tab = $slug_type == 'following';
 
-$user = User::get($slug_username) or not_found();
+$user = User::get_by_username($slug_username) or not_found();
 $connections = $is_following_tab
     ? Connection::get_following($user->username)
     : Connection::get_followers($user->username);
