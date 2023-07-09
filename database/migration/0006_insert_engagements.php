@@ -3,6 +3,8 @@
 use Database\Controllers\Engagement;
 use Database\Datagen\Output\GeneratedEngagements;
 
+echo 'Starting engagement migration' . PHP_EOL;
+
 $total = 0;
 
 foreach (GeneratedEngagements::$output as $engagement) {

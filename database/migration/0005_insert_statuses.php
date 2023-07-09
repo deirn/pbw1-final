@@ -4,6 +4,8 @@ use Database\Controllers\Status;
 use Database\Datagen\Output\GeneratedStatusAncestors;
 use Database\Datagen\Output\GeneratedStatusReplies;
 
+echo 'Starting status migration' . PHP_EOL;
+
 $ancestors = GeneratedStatusAncestors::$output;
 usort($ancestors, 'status_sorter');
 

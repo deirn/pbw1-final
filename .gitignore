@@ -3,3 +3,5 @@ vendor/
 _autocomplete/
 
 .env
+
+public/assets/media/avatar/

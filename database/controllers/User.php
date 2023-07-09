@@ -69,19 +69,19 @@ class User
         }
     }
 
-    public static function create(string $username, string $password, string $display_name, ?string $bio = null): ?User
+    public static function create(string $username, string $password, string $display_name, ?string $bio = null, ?string $avatar = null): ?User
     {
         // language=mariadb
-        $query = "insert into user(username, password, display_name, bio) values (?, ?, ?, ?)";
+        $query = "insert into user(username, password, display_name, bio, avatar) values (?, ?, ?, ?, ?)";
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-        $statement = DB::prepare_statement($query, "ssss", $username, $hashed_password, $display_name, $bio);
+        $statement = DB::prepare_statement($query, "sssss", $username, $hashed_password, $display_name, $bio, $avatar);
 
         if ($statement->execute()) {
             $user = new User();
             $user->username = $username;
             $user->password = $password;
             $user->display_name = $display_name;
-            $user->avatar = null;
+            $user->avatar = $avatar;
             $user->bio = $bio;
             return $user;
         }
