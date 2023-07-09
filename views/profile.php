@@ -48,6 +48,12 @@ $page_title = "{$user->display_name} (@{$user->username})";
           border-radius: 50%;
           background-color: #0dcaf0;
           translate: 1rem -50%;
+          overflow: hidden;
+      }
+
+      .c-avatar img {
+          width: 100%;
+          height: auto;
       }
 
       .c-buttons {
@@ -89,7 +95,10 @@ $page_title = "{$user->display_name} (@{$user->username})";
       <div class="c-banner-picture border-bottom"></div>
 
       <div class="c-avatar-holder">
-        <div class="c-avatar"></div>
+        <div class="c-avatar">
+          <img src="/assets/media/avatar/<?= $user->avatar ?>" alt="">
+        </div>
+
         <div class="c-buttons pt-3 pe-3">
             <?php if ($user_is_client) { ?>
               <a href="/settings/profile" class="btn btn-light border border-dark-subtle fw-bold">

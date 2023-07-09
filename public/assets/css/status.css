@@ -8,6 +8,12 @@
     height: 3rem;
     background-color: tomato;
     border-radius: 50%;
+    overflow: hidden;
+}
+
+.c-status-avatar img {
+    width: 100%;
+    height: auto;
 }
 
 .c-status-buttons > div {

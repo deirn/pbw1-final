@@ -41,6 +41,7 @@ function createStatusDiv(data) {
         created_at,
         updated_at,
         display_name,
+        avatar,
         like_count,
         child_count,
         liked_by_client,
@@ -59,7 +60,9 @@ function createStatusDiv(data) {
     const inner = !deleted ? `
       <div class="d-flex flex-column flex-shrink-0">
         <div class="c-thread-line c-hidden" id="thread-line-before"></div>
-        <div class="c-status-avatar"></div>
+        <div class="c-status-avatar">
+          <img src="/assets/media/avatar/${avatar}" alt="">
+        </div>
         <div class="c-thread-line c-hidden flex-grow-1" id="thread-line-after"></div>
       </div>
 

@@ -41,6 +41,12 @@ $page_title = $is_following_tab
           height: 3rem;
           background-color: #0dcaf0;
           border-radius: 50%;
+          overflow: hidden;
+      }
+
+      .c-avatar img {
+          width: 100%;
+          height: auto;
       }
 
       .c-user:hover {
@@ -101,7 +107,9 @@ $page_title = $is_following_tab
               data-followed="<?= $followed_by_client ? 'true' : 'false' ?>"
               data-username="<?= $connection_user->username ?>">
 
-            <div class="c-avatar flex-shrink-0 mb-auto"></div>
+            <div class="c-avatar flex-shrink-0 mb-auto">
+              <img src="/assets/media/avatar/<?= $connection_user->avatar ?>" alt="">
+            </div>
 
             <div class="d-flex flex-column flex-grow-1">
               <div class="d-flex">

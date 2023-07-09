@@ -2,11 +2,13 @@
 
 use Database\Controllers\Engagement;
 use Database\Controllers\Status;
+use Database\Controllers\User;
 
 global $page_title;
 global $slug_matches;
 
 $client_username = $_SESSION['username'];
+$client_user = User::get($client_username) or not_found();
 
 $status_id = $slug_matches[1];
 $status = Status::get($status_id) or not_found();
@@ -38,7 +40,9 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
           <div class="d-flex gap-3">
             <div class="d-flex flex-column flex-shrink-0">
               <div class="c-thread-line c-hidden" id="thread-line-before"></div>
-              <div class="c-status-avatar"></div>
+              <div class="c-status-avatar">
+                <img src="/assets/media/avatar/<?= $status->avatar ?>" alt="">
+              </div>
             </div>
 
             <div class="pt-3 d-flex flex-column flex-grow-1 gap-2">
@@ -117,7 +121,9 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
 
       <?php if (!$status->deleted) { ?>
         <div class="p-3 d-flex gap-3 border-bottom">
-          <div class="c-status-avatar flex-shrink-0 mb-auto"></div>
+          <div class="c-status-avatar flex-shrink-0 mb-auto">
+            <img src="/assets/media/avatar/<?= $client_user->avatar ?>" alt="">
+          </div>
 
           <div class="d-flex flex-column flex-grow-1 gap-2">
             <div>

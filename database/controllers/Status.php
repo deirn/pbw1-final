@@ -14,6 +14,7 @@ class Status
 
     // table: user
     public ?string $display_name;
+    public ?string $avatar;
 
     // table: engagement
     public ?int $like_count;
@@ -25,6 +26,7 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
+                         user.avatar,
                          count(distinct engagement.engagement_id) as like_count,
                          count(distinct child_status.status_id) as child_count
                   from status
@@ -103,6 +105,7 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
+                         user.avatar,
                          count(distinct engagement.engagement_id) as like_count,
                          count(distinct child_status.status_id) as child_count
                   from status
@@ -137,6 +140,7 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
+                         user.avatar,
                          count(distinct engagement.engagement_id) as like_count,
                          count(distinct child_status.status_id) as child_count
                   from status
@@ -178,6 +182,7 @@ class Status
         // language=mariadb
         $query = "select status.*,
                          user.display_name,
+                         user.avatar,
                          count(distinct engagement.engagement_id) as like_count,
                          count(distinct child_status.status_id) as child_count
                   from status

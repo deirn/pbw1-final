@@ -18,6 +18,12 @@ $page_title = "Search";
           height: 3rem;
           background-color: #0dcaf0;
           border-radius: 50%;
+          overflow: hidden;
+      }
+
+      .c-avatar img {
+          width: 100%;
+          height: auto;
       }
 
       .c-user:hover {
@@ -106,7 +112,9 @@ $page_title = "Search";
                 // language=html
                 searchResultContainer.append(`
                   <div class="c-user d-flex px-3 py-2 gap-3" id="user-${username}">
-                    <div class="c-avatar flex-shrink-0 mb-auto"></div>
+                    <div class="c-avatar flex-shrink-0 mb-auto">
+                      <img src="/assets/media/avatar/${avatar}" alt="">
+                    </div>
                     <div class="d-flex flex-column flex-grow-1">
                       <div class="d-flex">
                         <div class="flex-grow-1">
