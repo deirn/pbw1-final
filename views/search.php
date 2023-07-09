@@ -58,17 +58,21 @@ $page_title = "Search";
 
 <body>
 
-<div class="c-container container d-flex">
+<div class="c-container container p-0 d-flex">
     <?php PhpComponents::navbar(); ?>
 
-  <div class="flex-grow-1 border-end">
-    <div class="input-group p-3 border-bottom sticky-top bg-light">
-      <span class="input-group-text"><i class="fa-solid fa-fw fa-search"></i></span>
-      <input type="text" class="form-control" placeholder="Search Profiles" id="search-input"
-             aria-label="Search Profiles">
+  <div class="flex-grow-1 d-flex flex-column border-start border-end">
+    <div class="flex-grow-1" id="main">
+      <div class="input-group p-3 border-bottom sticky-top bg-light">
+        <span class="input-group-text"><i class="fa-solid fa-fw fa-search"></i></span>
+        <input type="text" class="form-control" placeholder="Search Profiles" id="search-input"
+               aria-label="Search Profiles">
+      </div>
+
+      <div class="d-flex flex-column" id="search-result-container"></div>
     </div>
 
-    <div class="d-flex flex-column" id="search-result-container"></div>
+      <?php PhpComponents::navbar_mobile(); ?>
   </div>
 </div>
 

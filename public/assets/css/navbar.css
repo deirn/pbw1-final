@@ -3,6 +3,20 @@
     height: 100vh;
 }
 
+.c-nav-mobile {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .c-nav {
+        display: none !important;
+    }
+
+    .c-nav-mobile {
+        display: flex !important;
+    }
+}
+
 .c-nav-icon {
     padding: 0.5em;
     width: 2em;

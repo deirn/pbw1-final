@@ -20,6 +20,7 @@ function get_typed_arg(int $index, string $type = stdClass::class): object|null
  * @method static header
  * @method static footer
  * @method static navbar
+ * @method static navbar_mobile
  * @method static profile_header(User $user)
  * @method static profile_username(string $username)
  * @method static confirm_modal(string $id, string $title, string $body)

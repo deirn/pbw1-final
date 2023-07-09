@@ -88,63 +88,67 @@ $page_title = "{$user->display_name} (@{$user->username})";
 
 <body>
 
-<div class="c-container container d-flex">
+<div class="c-container container p-0 d-flex">
     <?php PhpComponents::navbar(); ?>
 
-  <div class="flex-grow-1 border-end">
-    <div class="sticky-top bg-light">
-        <?php PhpComponents::profile_header($user); ?>
-    </div>
+  <div class="flex-grow-1 d-flex flex-column border-start border-end">
+    <div class="flex-grow-1" id="main">
+      <div class="sticky-top bg-light">
+          <?php PhpComponents::profile_header($user); ?>
+      </div>
 
-    <div class="border-bottom pb-3">
-      <div class="c-banner-picture border-bottom"></div>
+      <div class="border-bottom pb-3">
+        <div class="c-banner-picture border-bottom"></div>
 
-      <div class="c-avatar-holder">
-        <div class="c-avatar">
-          <img src="/assets/media/avatar/<?= $user->avatar ?>" alt="">
+        <div class="c-avatar-holder">
+          <div class="c-avatar">
+            <img src="/assets/media/avatar/<?= $user->avatar ?>" alt="">
+          </div>
+
+          <div class="c-buttons pt-3 pe-3">
+              <?php if ($user_is_client) { ?>
+                <a href="/settings/profile" class="btn btn-light border border-dark-subtle fw-bold">
+                  Edit Profile
+                </a>
+              <?php } else { ?>
+                <button class="btn btn-light border border-dark-subtle fw-bold" id="unfollow-button">
+                  <span></span>
+                </button>
+                <button class="btn btn-dark fw-bold" id="follow-button">Follow</button>
+              <?php } ?>
+          </div>
         </div>
 
-        <div class="c-buttons pt-3 pe-3">
-            <?php if ($user_is_client) { ?>
-              <a href="/settings/profile" class="btn btn-light border border-dark-subtle fw-bold">
-                Edit Profile
-              </a>
-            <?php } else { ?>
-              <button class="btn btn-light border border-dark-subtle fw-bold" id="unfollow-button">
-                <span></span>
-              </button>
-              <button class="btn btn-dark fw-bold" id="follow-button">Follow</button>
+        <div class="px-3 d-flex flex-column gap-2">
+          <div>
+            <div class="fw-bold fs-5"><?= $user->display_name ?></div>
+
+              <?php PhpComponents::profile_username($user->username) ?>
+
+          </div>
+
+            <?php if ($user->bio != null) { ?>
+              <div class="text-break"><?= $user->bio ?></div>
             <?php } ?>
+
+          <div class="d-flex gap-3">
+            <a href="/profile/<?= $user->username ?>/following"
+               class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover">
+              <span class="fw-bold" id="following-count"><?= $following ?></span> Following
+            </a>
+            <a href="/profile/<?= $user->username ?>/followers"
+               class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover">
+              <span class="fw-bold" id="follower-count"><?= $followers ?></span> Followers
+            </a>
+          </div>
         </div>
       </div>
 
-      <div class="px-3 d-flex flex-column gap-2">
-        <div>
-          <div class="fw-bold fs-5"><?= $user->display_name ?></div>
+      <div class="d-flex flex-column" id="status-container"></div>
 
-            <?php PhpComponents::profile_username($user->username) ?>
-
-        </div>
-
-          <?php if ($user->bio != null) { ?>
-            <div class="text-break"><?= $user->bio ?></div>
-          <?php } ?>
-
-        <div class="d-flex gap-3">
-          <a href="/profile/<?= $user->username ?>/following"
-             class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover">
-            <span class="fw-bold" id="following-count"><?= $following ?></span> Following
-          </a>
-          <a href="/profile/<?= $user->username ?>/followers"
-             class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover">
-            <span class="fw-bold" id="follower-count"><?= $followers ?></span> Followers
-          </a>
-        </div>
-      </div>
     </div>
 
-    <div class="d-flex flex-column" id="status-container"></div>
-
+      <?php PhpComponents::navbar_mobile(); ?>
   </div>
 </div>
 

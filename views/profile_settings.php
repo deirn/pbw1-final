@@ -21,33 +21,37 @@ $page_title = "Profile Settings";
 
 <body>
 
-<div class="c-container container d-flex">
+<div class="c-container container p-0 d-flex">
     <?php PhpComponents::navbar(); ?>
 
-  <div class="flex-grow-1 border-end">
-    <div class="sticky-top bg-light">
-        <?php PhpComponents::profile_header($user); ?>
-    </div>
-
-    <div class="px-3">
-
-      <div class="mb-3">
-        <label class="w-100" for="display_name">Name <span class="float-end text-danger display_name"></span></label>
-        <input type="text" class="form-control input" id="display_name" placeholder="Name"
-               value="<?= $user->display_name ?>">
+  <div class="flex-grow-1 d-flex flex-column border-start border-end">
+    <div class="flex-grow-1" id="main">
+      <div class="sticky-top bg-light">
+          <?php PhpComponents::profile_header($user); ?>
       </div>
 
-      <div class="mb-3">
-        <label class="w-100" for="bio">Bio
-          <span class="float-end text-body-secondary"><span id="bio-counter">0</span>/160</span>
-        </label>
-        <textarea class="form-control" id="bio" placeholder="Bio" maxlength="160"
-                  rows="3"><?= $user->bio ?? '' ?></textarea>
+      <div class="px-3">
+
+        <div class="mb-3">
+          <label class="w-100" for="display_name">Name <span class="float-end text-danger display_name"></span></label>
+          <input type="text" class="form-control input" id="display_name" placeholder="Name"
+                 value="<?= $user->display_name ?>">
+        </div>
+
+        <div class="mb-3">
+          <label class="w-100" for="bio">Bio
+            <span class="float-end text-body-secondary"><span id="bio-counter">0</span>/160</span>
+          </label>
+          <textarea class="form-control" id="bio" placeholder="Bio" maxlength="160"
+                    rows="3"><?= $user->bio ?? '' ?></textarea>
+        </div>
+
+        <button class="btn btn-dark mb-3 float-end fw-bold" id="save">Save</button>
       </div>
 
-      <button class="btn btn-dark mb-3 float-end fw-bold" id="save">Save</button>
     </div>
 
+      <?php PhpComponents::navbar_mobile(); ?>
   </div>
 </div>
 

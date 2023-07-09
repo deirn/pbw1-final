@@ -81,67 +81,70 @@ $page_title = $is_following_tab
 
 <body>
 
-<div class="c-container container d-flex">
+<div class="c-container container p-0 d-flex">
     <?php PhpComponents::navbar(); ?>
 
-  <div class="flex-grow-1 border-end">
-    <div class="sticky-top bg-light">
-        <?php PhpComponents::profile_header($user); ?>
+  <div class="flex-grow-1 d-flex flex-column border-start border-end">
+    <div class="flex-grow-1" id="main">
+      <div class="sticky-top bg-light">
+          <?php PhpComponents::profile_header($user); ?>
 
-      <ul class="c-tab nav nav-underline nav-fill border-bottom">
-        <li class="nav-item">
-          <a class="nav-link link-body-emphasis <?= $is_following_tab ? 'active' : '' ?>"
-             href="/profile/<?= $user->username ?>/following">Following</a>
-        </li>
+        <ul class="c-tab nav nav-underline nav-fill border-bottom">
+          <li class="nav-item">
+            <a class="nav-link link-body-emphasis <?= $is_following_tab ? 'active' : '' ?>"
+               href="/profile/<?= $user->username ?>/following">Following</a>
+          </li>
 
-        <li class="nav-item">
-          <a class="nav-link link-body-emphasis <?= $is_following_tab ? '' : 'active' ?>"
-             href="/profile/<?= $user->username ?>/followers">Followers</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link link-body-emphasis <?= $is_following_tab ? '' : 'active' ?>"
+               href="/profile/<?= $user->username ?>/followers">Followers</a>
+          </li>
+        </ul>
+      </div>
+
+      <ul class="nav flex-column">
+          <?php
+          foreach ($connections as $connection) {
+              $connection_user = $is_following_tab ? $connection->resolve_following() : $connection->resolve_follower();
+              $followed_by_client = Connection::get($client_username, $connection_user->username) != null;
+              ?>
+
+            <li class="c-user nav-item d-flex px-3 py-2 gap-3"
+                data-followed="<?= $followed_by_client ? 'true' : 'false' ?>"
+                data-username="<?= $connection_user->username ?>">
+
+              <div class="c-avatar flex-shrink-0 mb-auto">
+                <img src="/assets/media/avatar/<?= $connection_user->avatar ?>" alt="">
+              </div>
+
+              <div class="d-flex flex-column flex-grow-1">
+                <div class="d-flex">
+                  <div class="flex-grow-1">
+                    <a href="/profile/<?= $connection_user->username ?>"
+                       class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
+                        <?= $connection_user->display_name ?>
+                    </a>
+
+                      <?php PhpComponents::profile_username($connection_user->username) ?>
+
+                  </div>
+
+                  <div class="c-profile-buttons my-auto">
+                    <button class="c-profile-button c-unfollow btn btn-light border border-dark-subtle fw-bold">
+                      <span></span>
+                    </button>
+                    <button class="c-profile-button c-follow btn btn-dark fw-bold">Follow</button>
+                  </div>
+                </div>
+                <div><?= $connection_user->bio ?? '' ?></div>
+              </div>
+
+            </li>
+          <?php } ?>
       </ul>
     </div>
 
-    <ul class="nav flex-column">
-        <?php
-        foreach ($connections as $connection) {
-            $connection_user = $is_following_tab ? $connection->resolve_following() : $connection->resolve_follower();
-            $followed_by_client = Connection::get($client_username, $connection_user->username) != null;
-            ?>
-
-          <li class="c-user nav-item d-flex px-3 py-2 gap-3"
-              data-followed="<?= $followed_by_client ? 'true' : 'false' ?>"
-              data-username="<?= $connection_user->username ?>">
-
-            <div class="c-avatar flex-shrink-0 mb-auto">
-              <img src="/assets/media/avatar/<?= $connection_user->avatar ?>" alt="">
-            </div>
-
-            <div class="d-flex flex-column flex-grow-1">
-              <div class="d-flex">
-                <div class="flex-grow-1">
-                  <a href="/profile/<?= $connection_user->username ?>"
-                     class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
-                      <?= $connection_user->display_name ?>
-                  </a>
-
-                    <?php PhpComponents::profile_username($connection_user->username) ?>
-
-                </div>
-
-                <div class="c-profile-buttons my-auto">
-                  <button class="c-profile-button c-unfollow btn btn-light border border-dark-subtle fw-bold">
-                    <span></span>
-                  </button>
-                  <button class="c-profile-button c-follow btn btn-dark fw-bold">Follow</button>
-                </div>
-              </div>
-              <div><?= $connection_user->bio ?? '' ?></div>
-            </div>
-
-          </li>
-        <?php } ?>
-    </ul>
-
+      <?php PhpComponents::navbar_mobile(); ?>
   </div>
 </div>
 

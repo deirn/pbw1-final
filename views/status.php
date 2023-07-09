@@ -29,120 +29,125 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
 
 <body>
 
-<div class="c-container container d-flex">
+<div class="c-container container p-0 d-flex">
     <?php PhpComponents::navbar(); ?>
 
-  <div class="flex-grow-1 border-end" id="main">
-    <div class="d-flex flex-column" id="ancestor-status-container"></div>
+  <div class="flex-grow-1 d-flex flex-column border-start border-end">
+    <div class="flex-grow-1" id="main">
+      <div class="d-flex flex-column" id="ancestor-status-container"></div>
 
-      <?php if (!$status->deleted) { ?>
-        <div class="px-3 d-flex flex-column gap-3" id="main-status">
-          <div class="d-flex gap-3">
-            <div class="d-flex flex-column flex-shrink-0">
-              <div class="c-thread-line c-hidden" id="thread-line-before"></div>
-              <a href="/profile/<?= $status->username ?>" class="c-status-avatar">
-                <img src="/assets/media/avatar/<?= $status->avatar ?>" alt="">
-              </a>
-            </div>
-
-            <div class="pt-3 d-flex flex-column flex-grow-1 gap-2">
-              <div>
-                <div>
-                  <a href="/profile/<?= $status->username ?>"
-                     class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
-                      <?= $status->display_name ?>
-                  </a>
-                  <span class="float-end font-monospace text-body-tertiary">#<?= $status->status_id ?></span>
-                </div>
-
-
-                  <?php PhpComponents::profile_username($status->username) ?>
-
+        <?php if (!$status->deleted) { ?>
+          <div class="px-3 d-flex flex-column gap-3" id="main-status">
+            <div class="d-flex gap-3">
+              <div class="d-flex flex-column flex-shrink-0">
+                <div class="c-thread-line c-hidden" id="thread-line-before"></div>
+                <a href="/profile/<?= $status->username ?>" class="c-status-avatar">
+                  <img src="/assets/media/avatar/<?= $status->avatar ?>" alt="">
+                </a>
               </div>
 
-            </div>
-          </div>
-
-          <div class="text-break fs-5" id="main-status-content"><?= htmlspecialchars($status->status_content) ?></div>
-
-            <?php if ($status_by_client) { ?>
-              <div class="d-flex flex-column flex-grow-1 gap-2 pb-3 border-bottom d-none" id="edit-status-container">
+              <div class="pt-3 d-flex flex-column flex-grow-1 gap-2">
                 <div>
+                  <div>
+                    <a href="/profile/<?= $status->username ?>"
+                       class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
+                        <?= $status->display_name ?>
+                    </a>
+                    <span class="float-end font-monospace text-body-tertiary">#<?= $status->status_id ?></span>
+                  </div>
+
+
+                    <?php PhpComponents::profile_username($status->username) ?>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="text-break fs-5" id="main-status-content"><?= htmlspecialchars($status->status_content) ?></div>
+
+              <?php if ($status_by_client) { ?>
+                <div class="d-flex flex-column flex-grow-1 gap-2 pb-3 border-bottom d-none" id="edit-status-container">
+                  <div>
                   <textarea name="status-input" id="edit-input" rows="3" maxlength="280"
                             aria-label="New status" placeholder="Edit status"
                             class="form-control form-control-lg"></textarea>
-                </div>
+                  </div>
 
-                <div class="d-flex gap-3">
-                  <div class="flex-grow-1"></div>
-                  <div class="my-auto"><span id="edit-input-counter">0</span>/280</div>
-                  <button class="btn btn-light border border-dark-subtle fw-bold" id="post-edit-cancel">Cancel</button>
-                  <button class="btn btn-primary fw-bold" id="post-edit-submit" disabled>Edit</button>
-                </div>
-              </div>
-            <?php } // $status_by_client ?>
-
-          <div class="text-break pb-3 border-bottom d-flex gap-4">
-            <div class="my-auto"><span class="fw-bold" id="main-status-like-counter"><?= $status->like_count ?></span>
-              Likes
-            </div>
-            <button class="c-status-button c-status-like btn">
-              <i class="<?= $liked_by_client ? 'fa-solid' : 'fa-regular' ?> fa-fw fa-heart" id="main-status-heart"></i>
-            </button>
-
-            <div class="flex-grow-1"></div>
-            <div class="my-auto text-body-tertiary" id="main-status-time"></div>
-
-              <?php if ($status_by_client) { ?>
-
-                <div class="d-flex gap-2">
-                  <button class="c-status-button btn" id="edit-status"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="bottom" data-bs-title="Edit Status">
-                    <i class="fa-regular fa-fw fa-pen-to-square"></i>
-                  </button>
-
-                  <div data-bs-toggle="tooltip"
-                       data-bs-placement="bottom" data-bs-title="Delete Status">
-                    <button class="c-status-button btn"
-                            data-bs-toggle="modal" data-bs-target="#delete-status-modal">
-                      <i class="fa-regular fa-fw fa-trash-can"></i>
+                  <div class="d-flex gap-3">
+                    <div class="flex-grow-1"></div>
+                    <div class="my-auto"><span id="edit-input-counter">0</span>/280</div>
+                    <button class="btn btn-light border border-dark-subtle fw-bold" id="post-edit-cancel">Cancel
                     </button>
+                    <button class="btn btn-primary fw-bold" id="post-edit-submit" disabled>Edit</button>
                   </div>
                 </div>
               <?php } // $status_by_client ?>
 
+            <div class="text-break pb-3 border-bottom d-flex gap-3">
+              <div class="my-auto"><span class="fw-bold" id="main-status-like-counter"><?= $status->like_count ?></span>
+                Likes
+              </div>
+              <button class="c-status-button c-status-like btn">
+                <i class="<?= $liked_by_client ? 'fa-solid' : 'fa-regular' ?> fa-fw fa-heart"
+                   id="main-status-heart"></i>
+              </button>
+
+              <div class="flex-grow-1"></div>
+              <div class="my-auto text-body-tertiary" id="main-status-time"></div>
+
+                <?php if ($status_by_client) { ?>
+
+                  <div class="d-flex gap-2">
+                    <button class="c-status-button btn" id="edit-status"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom" data-bs-title="Edit Status">
+                      <i class="fa-regular fa-fw fa-pen-to-square"></i>
+                    </button>
+
+                    <div data-bs-toggle="tooltip"
+                         data-bs-placement="bottom" data-bs-title="Delete Status">
+                      <button class="c-status-button btn"
+                              data-bs-toggle="modal" data-bs-target="#delete-status-modal">
+                        <i class="fa-regular fa-fw fa-trash-can"></i>
+                      </button>
+                    </div>
+                  </div>
+                <?php } // $status_by_client ?>
+
+            </div>
           </div>
-        </div>
-      <?php } else { ?>
-        <div class="p-3 border-bottom text-center" id="main-status">Status deleted</div>
-      <?php } // !$status->deleted ?>
+        <?php } else { ?>
+          <div class="p-3 border-bottom text-center" id="main-status">Status deleted</div>
+        <?php } // !$status->deleted ?>
 
 
-      <?php if (!$status->deleted) { ?>
-        <div class="p-3 d-flex gap-3 border-bottom">
-          <div class="c-status-avatar flex-shrink-0 mb-auto">
-            <img src="/assets/media/avatar/<?= $client_user->avatar ?>" alt="">
-          </div>
+        <?php if (!$status->deleted) { ?>
+          <div class="p-3 d-flex gap-3 border-bottom">
+            <div class="c-status-avatar flex-shrink-0 mb-auto">
+              <img src="/assets/media/avatar/<?= $client_user->avatar ?>" alt="">
+            </div>
 
-          <div class="d-flex flex-column flex-grow-1 gap-2">
-            <div>
+            <div class="d-flex flex-column flex-grow-1 gap-2">
+              <div>
               <textarea name="status-input" id="reply-input" rows="3" maxlength="280"
                         aria-label="New status" placeholder="Post your reply!"
                         class="form-control form-control-lg"></textarea>
-            </div>
+              </div>
 
-            <div class="d-flex gap-3">
-              <div class="flex-grow-1"></div>
-              <div class="my-auto"><span id="reply-input-counter">0</span>/280</div>
-              <button class="btn btn-primary fw-bold" id="post-reply" disabled>Reply</button>
+              <div class="d-flex gap-3">
+                <div class="flex-grow-1"></div>
+                <div class="my-auto"><span id="reply-input-counter">0</span>/280</div>
+                <button class="btn btn-primary fw-bold" id="post-reply" disabled>Reply</button>
+              </div>
             </div>
           </div>
-        </div>
-      <?php } // !$status->deleted ?>
+        <?php } // !$status->deleted ?>
 
-    <div class="d-flex flex-column" id="status-container"></div>
+      <div class="d-flex flex-column" id="status-container"></div>
+    </div>
 
+      <?php PhpComponents::navbar_mobile(); ?>
   </div>
 </div>
 
@@ -170,7 +175,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
         mainStatusTime.html(statusCreatedAt);
 
         if (statusUpdatedAt !== null) {
-            mainStatusTime.append(`, Last Updated ${statusUpdatedAt}`);
+            mainStatusTime.append(`, Updated ${statusUpdatedAt}`);
         }
     }
 
