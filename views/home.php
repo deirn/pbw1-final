@@ -25,7 +25,7 @@ $page_title = "Home";
     <?php PhpComponents::navbar(); ?>
 
   <div class="flex-grow-1 border-end">
-    <div class="p-3 d-flex gap-3 border-bottom">
+    <div class="p-3 d-flex gap-3 border-bottom" id="status-input-container">
       <div class="c-status-avatar flex-shrink-0 mb-auto">
         <img src="/assets/media/avatar/<?= $client_user->avatar ?>" alt="">
       </div>
@@ -54,8 +54,10 @@ $page_title = "Home";
 
 <script>
     const statusInput = $("#status-input");
+    const statusInputContainer = $("#status-input-container");
     const statusInputCounter = $("#status-input-counter");
     const postStatusButton = $("#post-status");
+    const newStatusAnchor = $("#new-status-anchor");
 
     function fetchStatus(idBefore) {
         $.get("/api/get_home_status", {
@@ -89,6 +91,17 @@ $page_title = "Home";
             fetchStatus(earliestStatusId)
         }
     });
+
+    newStatusAnchor.click(function () {
+        setTimeout(function () {
+            window.scrollTo(0, 0);
+            statusInput.focus();
+        }, 100)
+    });
+
+    if (window.location.hash === "#new") {
+        newStatusAnchor.click();
+    }
 </script>
 </body>
 </html>

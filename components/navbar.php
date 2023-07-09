@@ -36,7 +36,7 @@ function active_class(string $title): string
     </li>
 
     <li class="nav-item">
-      <a href="?new" class="c-nav-icon c-nav-primary nav-link text-primary"
+      <a href="/home#new" class="c-nav-icon c-nav-primary nav-link text-primary" id="new-status-anchor"
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="right" data-bs-title="New Status">
