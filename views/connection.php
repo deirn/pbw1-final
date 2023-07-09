@@ -18,8 +18,8 @@ $connections = $is_following_tab
     : Connection::get_followers($user->username);
 
 $page_title = $is_following_tab
-    ? "People followed by {$user->display_name} (@{$user->username})"
-    : "People following {$user->display_name} (@{$user->username})";
+    ? "People followed by {$user->html_display_name()} (@{$user->username})"
+    : "People following {$user->html_display_name()} (@{$user->username})";
 ?>
 
 <!doctype html>
@@ -122,7 +122,7 @@ $page_title = $is_following_tab
                   <div class="flex-grow-1">
                     <a href="/profile/<?= $connection_user->username ?>"
                        class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
-                        <?= $connection_user->display_name ?>
+                        <?= $connection_user->html_display_name() ?>
                     </a>
 
                       <?php PhpComponents::profile_username($connection_user->username) ?>
@@ -136,7 +136,7 @@ $page_title = $is_following_tab
                     <button class="c-profile-button c-follow btn btn-dark fw-bold">Follow</button>
                   </div>
                 </div>
-                <div><?= $connection_user->bio ?? '' ?></div>
+                <div><?= $connection_user->html_bio() ?></div>
               </div>
 
             </li>

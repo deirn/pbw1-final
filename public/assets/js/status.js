@@ -71,7 +71,7 @@ function createStatusDiv(data) {
           <div class="d-flex gap-2">
             <a href="/profile/${username}"
                class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
-              ${display_name}
+              ${escapeHtml(display_name)}
             </a>
             <div class="font-monospace text-body-secondary">@${username}</div>
             <div class="text-body-tertiary flex-grow-1">${dateString} ${updatedIcon}</div>
@@ -128,6 +128,8 @@ function statusResponseHandler(data) {
     for (let i = 0; i < data.length; i++) {
         const {status_id, status_content} = data[i];
         const statusDiv = createStatusDiv(data[i]);
+
+        console.log(statusDiv);
 
         statusContainer.append(statusDiv);
         setupStatusDiv(status_id, status_content);

@@ -11,3 +11,18 @@ function parseMysqlDateTime(dateTime) {
 function hasTextSelected() {
     return window.getSelection().toString().length > 0;
 }
+
+const unsafeHtml = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+    '/': '&#x2F;',
+    '`': '&#x60;',
+    '=': '&#x3D;'
+};
+
+function escapeHtml(str) {
+    return str.replace(/[&<>"'`=\/]/g, (c) => unsafeHtml[c] || c);
+}

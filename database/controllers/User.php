@@ -11,6 +11,16 @@ class User
     public ?string $avatar;
     public ?string $bio;
 
+    public function html_display_name(): string
+    {
+        return htmlspecialchars($this->display_name);
+    }
+
+    public function html_bio(): string
+    {
+        return $this->bio == null ? '' : htmlspecialchars($this->bio);
+    }
+
     public static function get_by_id(int $user_id): ?User
     {
         // language=mariadb

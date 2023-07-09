@@ -10,5 +10,5 @@ $arg_user = get_typed_arg(0, User::class);
   <a class="c-back-button btn my-auto" href="javascript:history.back()">
     <i class="fa-solid fa-fw fa-arrow-left"></i>
   </a>
-  <div class="fs-5"><?= $arg_user->display_name ?></div>
+  <div class="fs-5"><?= $arg_user->html_display_name() ?></div>
 </div>

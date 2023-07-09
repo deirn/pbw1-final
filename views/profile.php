@@ -17,7 +17,7 @@ $following = Connection::get_following_count($user->username);
 $user_is_client = $user->username == $client_username;
 $user_is_followed = !$user_is_client && (Connection::get($client_username, $user->username) != null);
 
-$page_title = "{$user->display_name} (@{$user->username})";
+$page_title = "{$user->html_display_name()} (@{$user->username})";
 ?>
 
 <!doctype html>
@@ -121,15 +121,13 @@ $page_title = "{$user->display_name} (@{$user->username})";
 
         <div class="px-3 d-flex flex-column gap-2">
           <div>
-            <div class="fw-bold fs-5"><?= $user->display_name ?></div>
+            <div class="fw-bold fs-5"><?= $user->html_display_name() ?></div>
 
               <?php PhpComponents::profile_username($user->username) ?>
 
           </div>
 
-            <?php if ($user->bio != null) { ?>
-              <div class="text-break"><?= $user->bio ?></div>
-            <?php } ?>
+          <div class="text-break"><?= $user->html_bio() ?></div>
 
           <div class="d-flex gap-3">
             <a href="/profile/<?= $user->username ?>/following"

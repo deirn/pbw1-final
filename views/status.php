@@ -15,7 +15,7 @@ $status = Status::get($status_id) or not_found();
 $status_by_client = !$status->deleted && $status->username == $client_username;
 $liked_by_client = Engagement::is_status_liked($client_username, $status_id);
 
-$page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"{$status->status_content}\"";
+$page_title = $status->deleted ? 'Deleted Status' : "{$status->html_display_name()}: \"{$status->html_status_content()}\"";
 ?>
 
 <!doctype html>
@@ -51,7 +51,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
                   <div>
                     <a href="/profile/<?= $status->username ?>"
                        class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
-                        <?= $status->display_name ?>
+                        <?= $status->html_display_name() ?>
                     </a>
                     <span class="float-end font-monospace text-body-tertiary">#<?= $status->status_id ?></span>
                   </div>
@@ -64,7 +64,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->display_name}: \"
               </div>
             </div>
 
-            <div class="text-break fs-5" id="main-status-content"><?= htmlspecialchars($status->status_content) ?></div>
+            <div class="text-break fs-5" id="main-status-content"><?= $status->html_status_content() ?></div>
 
               <?php if ($status_by_client) { ?>
                 <div class="d-flex flex-column flex-grow-1 gap-2 pb-3 border-bottom d-none" id="edit-status-container">

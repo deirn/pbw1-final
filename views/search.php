@@ -129,7 +129,7 @@ $page_title = "Search";
                         <div class="flex-grow-1">
                           <a href="/profile/${username}"
                              class="link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-100-hover fw-bold">
-                            ${display_name}
+                            ${escapeHtml(display_name)}
                           </a>
                           <div>
                             <span class="font-monospace text-body-secondary">@${username}</span>
@@ -139,7 +139,7 @@ $page_title = "Search";
 
                         ${followButtonsDiv}
                       </div>
-                      <div>${bio ?? ''}</div>
+                      <div>${bio == null ? '' : escapeHtml(bio)}</div>
                     </div>
                   </div>`);
 

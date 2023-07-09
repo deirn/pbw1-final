@@ -21,6 +21,16 @@ class Status
 
     public ?int $child_count;
 
+    public function html_display_name(): string
+    {
+        return htmlspecialchars($this->display_name);
+    }
+
+    public function html_status_content(): string
+    {
+        return htmlspecialchars($this->status_content);
+    }
+
     public static function get(int $status_id): ?Status
     {
         // language=mariadb
