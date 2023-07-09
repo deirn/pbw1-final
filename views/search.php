@@ -16,9 +16,14 @@ $page_title = "Search";
       .c-avatar {
           width: 3rem;
           height: 3rem;
-          background-color: #0dcaf0;
+          background-color: var(--bs-gray-300);
           border-radius: 50%;
           overflow: hidden;
+
+          background-image: url("/assets/media/noavatar.svg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: auto 100%;
       }
 
       .c-avatar img {

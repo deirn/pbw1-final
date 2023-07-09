@@ -46,9 +46,14 @@ $page_title = "{$user->display_name} (@{$user->username})";
           width: 9rem;
           border: 4px solid var(--bs-light);
           border-radius: 50%;
-          background-color: #0dcaf0;
+          background-color: var(--bs-gray-300);
           translate: 1rem -50%;
           overflow: hidden;
+
+          background-image: url("/assets/media/noavatar.svg");
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: auto 100%;
       }
 
       .c-avatar img {
