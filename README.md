@@ -32,7 +32,7 @@ Unnecessarily complex because I like pain, and regular CRUD app is just plain bo
    127.0.0.1       final_0013.test
    ```
 3. Start Apache and MySQL module on XAMPP control panel.
-4. Copy `.env_example` to `.env` and modify if needed.
+4. Copy `.env.example` to `.env` and modify if needed.
 5. Install Dependencies and migrate database.
    ```
    composer install

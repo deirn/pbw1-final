@@ -9,6 +9,8 @@ $request_uri = rtrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
 $page_title = '';
 $slug_matches = [];
+$error_code = 200;
+$error_message = '';
 
 function handle_request(): void
 {
@@ -72,11 +74,30 @@ function handle_request(): void
 }
 
 #[NoReturn]
-function not_found(): void
+function error_page(int $code, string $message): void
 {
-    http_response_code(404);
-    require __DIR__ . '/../views/404.php';
+    global $error_code;
+    global $error_message;
+
+    $error_code = $code;
+    $error_message = $message;
+
+    http_response_code($error_code);
+    require __DIR__ . '/../views/__ERROR.php';
     die();
+}
+
+#[NoReturn]
+function not_found(string $message = 'Where are you going?'): void
+{
+    error_page(404, $message);
+}
+
+
+#[NoReturn]
+function server_error(): void
+{
+    error_page(500, 'Internal Server Error');
 }
 
 handle_request();

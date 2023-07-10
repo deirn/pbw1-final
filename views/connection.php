@@ -20,6 +20,8 @@ $connections = $is_following_tab
 $page_title = $is_following_tab
     ? "People followed by {$user->html_display_name()} (@{$user->username})"
     : "People following {$user->html_display_name()} (@{$user->username})";
+
+$show_export_button = ((int)$_ENV['FEAT_EXPORT_CONNECTIONS']) > 0;
 ?>
 
 <!doctype html>
@@ -87,7 +89,16 @@ $page_title = $is_following_tab
   <div class="flex-grow-1 d-flex flex-column border-start border-end">
     <div class="flex-grow-1" id="main">
       <div class="sticky-top bg-light">
-          <?php PhpComponents::profile_header($user); ?>
+
+        <div class="px-3 py-2 d-flex gap-3">
+          <a class="c-back-button btn my-auto" href="javascript:history.back()">
+            <i class="fa-solid fa-fw fa-arrow-left"></i>
+          </a>
+          <div class="fs-5 flex-grow-1 my-auto"><?= $user->html_display_name() ?></div>
+            <?php if ($show_export_button) { ?>
+              <a href="/api/export_connection?username=<?= $user->username ?>" class="c-profile-button btn btn-dark fw-bold">Export</a>
+            <?php } ?>
+        </div>
 
         <ul class="c-tab nav nav-underline nav-fill border-bottom">
           <li class="nav-item">
