@@ -2,9 +2,9 @@
 
 function active_class_mobile(string $title): string
 {
-    global $page_title;
+    global $page_view;
 
-    return $page_title == $title ? 'active' : '';
+    return $page_view == $title ? 'active' : '';
 }
 
 ?>
@@ -18,7 +18,7 @@ function active_class_mobile(string $title): string
     </li>
 
     <li class="nav-item">
-      <a href="/home" class="c-nav-icon nav-link <?= active_class_mobile("Home") ?>"
+      <a href="/home" class="c-nav-icon nav-link <?= active_class_mobile("home") ?>"
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="top" data-bs-title="Home">
@@ -27,7 +27,7 @@ function active_class_mobile(string $title): string
     </li>
 
     <li class="nav-item">
-      <a href="/search" class="c-nav-icon nav-link <?= active_class_mobile("Search") ?>"
+      <a href="/search" class="c-nav-icon nav-link <?= active_class_mobile("search") ?>"
          aria-current="page" title=""
          data-bs-toggle="tooltip"
          data-bs-placement="top" data-bs-title="Search">
@@ -54,6 +54,15 @@ function active_class_mobile(string $title): string
          data-bs-toggle="tooltip"
          data-bs-placement="top" data-bs-title="Profile">
         <i class="fa-solid fa-fw fa-user"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="/info" class="c-nav-icon nav-link <?= active_class("info") ?>"
+         aria-current="page" title=""
+         data-bs-toggle="tooltip"
+         data-bs-placement="top" data-bs-title="Info">
+        <i class="fa-solid fa-fw fa-circle-info"></i>
       </a>
     </li>
 

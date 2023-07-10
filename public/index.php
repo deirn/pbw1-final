@@ -7,6 +7,7 @@ require_once __DIR__ . '/../components/index.php';
 
 $request_uri = rtrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
+$page_view = '';
 $page_title = '';
 $slug_matches = [];
 $error_code = 200;
@@ -16,6 +17,7 @@ function handle_request(): void
 {
     global $request_uri;
     global $slug_matches;
+    global $page_view;
 
     // /api/[api]
     if (1 == preg_match("/^\/api\/(.*)$/", $request_uri, $slug_matches)) {
@@ -41,30 +43,41 @@ function handle_request(): void
             break;
 
         case '/home':
+            $page_view = 'home';
             require __DIR__ . '/../views/home.php';
             break;
 
         case '/search':
+            $page_view = 'search';
             require __DIR__ . '/../views/search.php';
             break;
 
         case '/settings/profile':
+            $page_view = 'profile_settings';
             require __DIR__ . '/../views/profile_settings.php';
+            break;
+
+        case '/info':
+            $page_view = 'info';
+            require __DIR__ . '/../views/info.php';
             break;
 
         // /profile/[username]
         case 1 == preg_match("/^\/profile\/([a-z0-9_]{5,15})$/", $request_uri, $slug_matches):
+            $page_view = 'profile';
             require __DIR__ . '/../views/profile.php';
             break;
 
         // /profile/[username]/following
         // /profile/[username]/followers
         case 1 == preg_match("/^\/profile\/([a-z0-9_]{5,15})\/(following|followers)$/", $request_uri, $slug_matches):
+            $page_view = 'connection';
             require __DIR__ . '/../views/connection.php';
             break;
 
         // /status/[status_id]
         case 1 == preg_match("/^\/status\/([0-9]+)$/", $request_uri, $slug_matches):
+            $page_view = 'status';
             require __DIR__ . '/../views/status.php';
             break;
 

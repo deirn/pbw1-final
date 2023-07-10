@@ -44,6 +44,7 @@ Unnecessarily complex because I like pain, and regular CRUD app is just plain bo
 
 - [PHP dotenv](https://github.com/vlucas/phpdotenv)
 - [Faker](https://github.com/FakerPHP/Faker)
+- [Mpdf](https://mpdf.github.io/)
 - [JQuery](https://jquery.com/)
 - [Bootstrap](https://getbootstrap.com/)
 - [Font Awesome](https://fontawesome.com/)

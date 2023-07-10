@@ -129,8 +129,6 @@ function statusResponseHandler(data) {
         const {status_id, status_content} = data[i];
         const statusDiv = createStatusDiv(data[i]);
 
-        console.log(statusDiv);
-
         statusContainer.append(statusDiv);
         setupStatusDiv(status_id, status_content);
 

@@ -76,7 +76,6 @@ $page_title = "Profile Settings";
             if (data["error_field"] !== undefined) {
                 $(`#${data["error_field"]}`).addClass("border-danger");
                 $(`.c-hint.${data["error_field"]}`).html(`${data["error_msg"]}`);
-                console.log(data);
             } else {
                 window.top.location = `/profile/${clientUsername}`;
             }

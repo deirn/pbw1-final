@@ -209,7 +209,6 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->html_display_name
     });
 
     postEditSubmitButton.click(function () {
-        console.log("aaa");
         $.post("/api/edit_status", {
             status_id: <?= $status_id ?>,
             content: editInput.val().trim()
@@ -314,8 +313,7 @@ $page_title = $status->deleted ? 'Deleted Status' : "{$status->html_display_name
     $("#delete-status-modal #confirm-button").click(function () {
         $.post("/api/delete_status", {
             status_id: <?= $status_id ?>
-        }, function (json) {
-            console.log(json);
+        }, function () {
             window.location.reload();
         });
     });
