@@ -38,7 +38,16 @@ Unnecessarily complex because I like pain, and regular CRUD app is just plain bo
    composer install
    php database/migration/0000_all.php
    ```
-6. Go to `final_0013.test`.
+   Composer may complain about failing to install mPDF,
+   this is probably caused by some PHP extensions are not enabled.
+   
+   Open `C:\xampp\php\php.ini`, and make sure `gd` and `mbstring` extensions are enabled
+   (line not started by a semicolon `;`).
+   ```ini
+   extension=gd
+   extension=mbstring
+   ```
+7. Go to `final_0013.test`.
 
 ## Libraries
 
